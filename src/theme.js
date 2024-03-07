@@ -2,7 +2,7 @@
 "use client";
 
 import { createTheme } from "@mui/material/styles";
-import config from "../../rajat-project/src/confic.json";
+import config from "./config.json";
 const theme = createTheme({
   breakpoints: {
     values: {
