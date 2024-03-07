@@ -12,7 +12,7 @@ export default function HomeSection1() {
     <>
      <Box sx={{ paddingTop: "50px" }}>
         <Box sx={{ position: "relative" }}>
-          <img src="HomeiMAGE.jpg" style={{ width: "100%", height: "500px", filter: "brightness(50%)" }} />
+          <img src="HomeiMAGE.jpg" alt="home" style={{ width: "100%", height: "500px", filter: "brightness(50%)" }} />
           <Box
             style={{
               position: "absolute",

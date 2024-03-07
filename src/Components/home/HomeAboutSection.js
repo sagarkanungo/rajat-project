@@ -27,7 +27,7 @@ function HomeImage() {
             <Typography variant="h6">About us</Typography>
             <Typography>Simplifying Tax and GST Management for You!</Typography>
             <Typography>
-              Welcome to our platform, where we're dedicated to making tax and
+              Welcome to our platform, where we&apos;re dedicated to making tax and
               GST management a breeze for individuals and businesses alike. Our
               mission is to empower you with the tools and knowledge necessary
               to navigate the complexities of taxes effortlessly.
@@ -43,7 +43,7 @@ function HomeImage() {
             <Typography>
               At <span style={{ fontWeight: 700 }}>TaxSmart</span>, we
               understand the challenges you face when it comes to understanding
-              and complying with tax regulations. That's why we've developed a
+              and complying with tax regulations. That&apos;s why we&apos;ve developed a
               user-friendly web application designed to simplify the process,
               saving you time and minimizing stress.
             </Typography>
@@ -68,6 +68,7 @@ function HomeImage() {
           <Box sx={{ padding: " 0 30px 25px", backgroundColor: "" }}>
             <img
               src="Home.jpg"
+              alt="Home about"
               style={{ width: "100%", height: "80vh", borderRadius: "35px" }}
             />
           </Box>

@@ -6,7 +6,7 @@ const AboutSection = () => {
   return (
     <>
       <Container maxWidth="xl" disableGutters>
-        <img src="about.jpg" style={{ width: "100%", height: "500px", filter: "brightness(50%)",paddingTop:'60px' }} ></img>
+        <img src="about.jpg" alt="about" style={{ width: "100%", height: "500px", filter: "brightness(50%)",paddingTop:'60px' }} ></img>
         <Box sx={{ textAlign: "center", textDecoration: "underLine" }}>
           <Typography variant="h3">About Us</Typography>
         </Box>

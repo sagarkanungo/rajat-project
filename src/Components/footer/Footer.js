@@ -35,7 +35,7 @@ function Footer() {
           </Typography>
           <Typography color="white" variant="caption">
             Get inspired by our curated list of must-visit destinations. Whether
-            you're dreaming of sandy beaches, historic landmarks, or
+            you&apos;re dreaming of sandy beaches, historic landmarks, or
             breathtaking landscapes, start your journey here.
           </Typography>
         </Grid>
