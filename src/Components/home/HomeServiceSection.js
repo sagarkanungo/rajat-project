@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Typography, Card, CardContent } from "@mui/material";
+import { Box, Typography, Card, CardContent } from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -35,8 +35,9 @@ const services = [
 
 function HomeServiceSection() {
   const router = useRouter();
+
   const settings = {
-    dots: false,
+    // dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
@@ -70,7 +71,7 @@ function HomeServiceSection() {
         style={{
           width: "100%",
           height: "500px",
-          objectFit: "cover", // Ensure the image covers the entire box
+          objectFit: "cover",
         }}
       />
       <Box
@@ -84,10 +85,10 @@ function HomeServiceSection() {
           width: "80%",
         }}
       >
-        <Typography variant="h5" sx={{ fontSize: "6vw" }}>
+        <Typography variant="h5" sx={{ fontSize: { xs: "6vw", sm: "4vw" } }}>
           Our Services
         </Typography>
-        <Typography variant="h6" sx={{ fontSize: "3vw" }}>
+        <Typography variant="h6" sx={{ fontSize: { xs: "3vw", sm: "2vw" } }}>
           CheckOut Our Service may Help You
         </Typography>
       </Box>
@@ -104,14 +105,18 @@ function HomeServiceSection() {
           {services.map((service, index) => (
             <Box
               key={index}
-              sx={{ width: "100%", textAlign: "center", padding: "0 8px" }}
+              sx={{
+                width: "100%",
+                textAlign: "center",
+                padding: { xs: "0 8px", sm: "0 16px" },
+              }}
             >
               <Card
                 sx={{
                   cursor: "pointer",
                   display: "inline-block",
                   width: "100%",
-                  height: "200px", // Fixed height for each card
+                  height: "100%",
                   overflow: "hidden",
                   borderRadius: 6,
                   transition: "transform 0.2s",
@@ -119,7 +124,7 @@ function HomeServiceSection() {
                   borderColor: "#007bff",
                   "&:hover": {
                     transform: "scale(1.05)",
-                    boxShadow: "4px 4px 8px rgba(0, 0, 0, 0.3)", // Increases shadow on hover
+                    boxShadow: "4px 4px 8px rgba(0, 0, 0, 0.3)",
                     borderColor: "#007bff",
                   },
                 }}
@@ -127,7 +132,13 @@ function HomeServiceSection() {
                   router.push("services");
                 }}
               >
-                <CardContent>
+                <CardContent
+                 sx={{
+                  height: "100%", // Set height to 100% to ensure consistent height
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+                >
                   <Typography variant="h6" component="div">
                     {service.title}
                   </Typography>

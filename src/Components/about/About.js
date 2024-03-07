@@ -5,14 +5,15 @@ import Footer from "../footer/Footer";
 const AboutSection = () => {
   return (
     <>
-      <Container maxWidth="xl" disableGutters>
-        <img src="about.jpg" alt="about" style={{ width: "100%", height: "500px", filter: "brightness(50%)",paddingTop:'60px' }} ></img>
+      <Box sx={{ paddingTop: "50px" }}>
+        <Box sx={{ position: "relative" }}>
+        <img src="about.jpg" alt="about" style={{ width: "100%", height: "auto", filter: "brightness(50%)" }} ></img>
         <Box sx={{ textAlign: "center", textDecoration: "underLine" }}>
-          <Typography variant="h3">About Us</Typography>
+          <Typography variant="h4">About Us</Typography>
         </Box>
         <Box sx={{ padding: "12px 40px" }}>
           <Box sx={{ justifyContent: "flex-start", padding: "24px" }}>
-            <Typography variant="h5">Our History</Typography>
+            <Typography variant="h4">Our History</Typography>
             <Typography variant="caption">
               At XYZ Company, our journey began in a small garage, where our
               founders, Jane and John Smith, shared a passion for creating
@@ -22,7 +23,7 @@ const AboutSection = () => {
             </Typography>
           </Box>
           <Box sx={{ justifyContent: "flex-start", padding: "24px" }}>
-            <Typography variant="h5">Our Mission</Typography>
+            <Typography variant="h4">Our Mission</Typography>
             <Typography variant="caption">
               Our mission is to develop and deliver intuitive, user-centric
               solutions that address the evolving needs of our customers. We are
@@ -32,7 +33,7 @@ const AboutSection = () => {
             </Typography>
           </Box>
           <Box sx={{ justifyContent: "flex-start", padding: "24px" }}>
-            <Typography variant="h5">Our Vission</Typography>
+            <Typography variant="h4">Our Vission</Typography>
             <Typography variant="caption">
               Our vision at XYZ Company is to empower individuals and businesses
               worldwide through cutting-edge technology that enhances
@@ -43,7 +44,9 @@ const AboutSection = () => {
             </Typography>
           </Box>
         </Box>
-      </Container>
+        </Box>
+
+      </Box>
       <Footer />
     </>
   );

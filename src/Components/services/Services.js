@@ -1,10 +1,10 @@
 import React from "react";
-import { Box, Button, Typography, Divider } from "@mui/material";
+import { Box, Typography, Divider } from "@mui/material";
 import serviceDetail from "./ServiceDetail";
 
 function Services() {
   return (
-    <Box style={{ marginTop: 80, marginLeft: 4 }}>
+    <Box sx={{ marginTop: { xs: 8, md: 8 }, marginLeft: { xs: 2, md: 4 } }}>
       <Typography
         variant="h3"
         sx={{
@@ -16,14 +16,22 @@ function Services() {
         Our Services
       </Typography>
       {serviceDetail.map((item, index) => (
-        <Box key={index} style={{  padding: "60px 24px 0px",textAlign:'center' }}>
+        <Box key={index} sx={{ padding: { xs: "20px 12px 0", md: "60px 24px 0" }, textAlign: 'center' }}>
           <Typography variant="h4" gutterBottom>
             {item.title}
           </Typography>
           <Typography variant="body1" gutterBottom>
             {item.details}
           </Typography>
-          <Box style={{ display: "flex", gap: "10px", marginTop: "10px",justifyContent:'center' }}>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "10px",
+              marginTop: "10px",
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
             {item.packages &&
               item.packages.map((pkg, i) => (
                 <Box
@@ -34,15 +42,14 @@ function Services() {
                     padding: 2,
                     borderRadius: 8,
                     textAlign: "center",
-                    width: "20%",
+                    width: { xs: "100%", sm: "45%", md: "20%" },
                     cursor: "pointer",
                     backgroundColor: "azure",
                     transition: "transform 0.2s",
                     boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
                     "&:hover": {
                       transform: "scale(1.05)",
-                      boxShadow: "4px 4px 8px rgba(0, 0, 0, 0.3)", // Increases shadow on hover
-                      borderColor: "#007bff",
+                      boxShadow: "4px 4px 8px rgba(0, 0, 0, 0.3)",
                     },
                   }}
                 >
@@ -62,20 +69,17 @@ function Services() {
                         <li key={j}>{feature}</li>
                       ))}
                   </ul>
-
-                
                 </Box>
               ))}
           </Box>
           <Divider
-           sx={{
-            width: "80%",
-            margin: "24px auto", // Centering the divider and applying equal margin
-            background: "#E8E9E8",
-          }}
+            sx={{
+              width: { xs: "100%", sm: "80%" },
+              margin: "24px auto", // Centering the divider and applying equal margin
+              background: "#E8E9E8",
+            }}
           />
         </Box>
-        
       ))}
     </Box>
   );

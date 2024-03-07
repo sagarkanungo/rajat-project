@@ -19,6 +19,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
+
 function Footer() {
   return (
     <Box
@@ -26,16 +27,17 @@ function Footer() {
         width: "100%",
         height: "auto",
         backgroundColor: "slategray",
+        padding: { xs: "40px 20px", sm: "40px 0" },
       }}
     >
-      <Grid container spacing={1} marginLeft={5} paddingTop="40px">
+      <Grid container spacing={2}>
         <Grid item xs={12} sm={6} md={3}>
           <Typography color="white" variant="h6">
             About Us
           </Typography>
           <Typography color="white" variant="caption">
             Get inspired by our curated list of must-visit destinations. Whether
-            you&apos;re dreaming of sandy beaches, historic landmarks, or
+            you're dreaming of sandy beaches, historic landmarks, or
             breathtaking landscapes, start your journey here.
           </Typography>
         </Grid>
@@ -43,20 +45,20 @@ function Footer() {
           <Typography color="white" variant="h6">
             Services
           </Typography>
-          <List component="ul">
-            <ListItem component="li" sx={{ paddingLeft: 0 }}>
+          <List>
+            <ListItem sx={{ paddingLeft: 0 }}>
               <ListItemText sx={{ color: "white" }} primary="Online Booking" />
             </ListItem>
-            <ListItem component="li" sx={{ paddingLeft: 0 }}>
+            <ListItem sx={{ paddingLeft: 0 }}>
               <ListItemText
                 sx={{ color: "white" }}
                 primary="International Package"
               />
             </ListItem>
-            <ListItem component="li" sx={{ paddingLeft: 0 }}>
+            <ListItem sx={{ paddingLeft: 0 }}>
               <ListItemText sx={{ color: "white" }} primary="Indian package" />
             </ListItem>
-            <ListItem component="li" sx={{ paddingLeft: 0 }}>
+            <ListItem sx={{ paddingLeft: 0 }}>
               <ListItemText sx={{ color: "white" }} primary="Travel Package" />
             </ListItem>
           </List>
@@ -76,8 +78,8 @@ function Footer() {
           <Typography color="white" variant="h6">
             Contact
           </Typography>
-          <List component="ul">
-            <ListItem component="li" sx={{ paddingLeft: 0 }}>
+          <List>
+            <ListItem sx={{ paddingLeft: 0 }}>
               <ListItemIcon sx={{ minWidth: "40px", color: "white" }}>
                 <MailOutlineIcon />
               </ListItemIcon>
@@ -86,13 +88,13 @@ function Footer() {
                 primary="trvl111@gmail.com"
               />
             </ListItem>
-            <ListItem component="li" sx={{ paddingLeft: 0 }}>
+            <ListItem sx={{ paddingLeft: 0 }}>
               <ListItemIcon sx={{ minWidth: "40px", color: "white" }}>
                 <LocalPhoneOutlinedIcon sx={{ color: "white" }} />
               </ListItemIcon>
               <ListItemText sx={{ color: "white" }} primary="+91-6264531002" />
             </ListItem>
-            <ListItem component="li" sx={{ paddingLeft: 0 }}>
+            <ListItem sx={{ paddingLeft: 0 }}>
               <ListItemIcon sx={{ minWidth: "40px", color: "white" }}>
                 <HomeWorkOutlinedIcon sx={{ color: "white" }} />
               </ListItemIcon>

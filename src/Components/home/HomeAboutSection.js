@@ -10,20 +10,19 @@ import {
   Divider,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
+
 function HomeImage() {
   const router = useRouter();
+
   return (
     <Box
       sx={{
-        // margin: { xs: "64px 16px", md: "20px 136px 0 " },
-        width: "auto",
-        height: "auto",
-        paddingTop: "50px",
+        paddingTop: { xs: "20px", sm: "50px" },
       }}
     >
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
-          <Box sx={{ padding: "24px 0px 0px 35px" }}>
+          <Box sx={{ padding: { xs: "24px 0px 0px 10px", sm: "24px 0px 0px 35px" } }}>
             <Typography variant="h6">About us</Typography>
             <Typography>Simplifying Tax and GST Management for You!</Typography>
             <Typography>
@@ -36,8 +35,7 @@ function HomeImage() {
               sx={{
                 width: "100%",
                 background: "#E8E9E8",
-                m: "24px 0px",
-                gap: "24px",
+                my: { xs: "24px", sm: "24px 0px" },
               }}
             />
             <Typography>
@@ -47,7 +45,7 @@ function HomeImage() {
               user-friendly web application designed to simplify the process,
               saving you time and minimizing stress.
             </Typography>
-            <Box padding="2rem 0rem 0rem">
+            <Box sx={{ padding: "1rem 0" }}>
               <Button
                 variant="text"
                 size="medium"
@@ -63,13 +61,17 @@ function HomeImage() {
           item
           xs={12}
           sm={6}
-          sx={{ alignItems: "center", justifyContent: "space-between" }}
+          sx={{
+            alignItems: "center",
+            justifyContent: "center",
+            padding: { xs: "0 10px", sm: "0 30px" },
+          }}
         >
-          <Box sx={{ padding: " 0 30px 25px", backgroundColor: "" }}>
+          <Box sx={{ padding: "0 10px" }}>
             <img
               src="Home.jpg"
               alt="Home"
-              style={{ width: "100%", height: "80vh", borderRadius: "35px" }}
+              style={{ width: "100%", height: "auto", borderRadius: "20px" }}
             />
           </Box>
         </Grid>
@@ -77,4 +79,5 @@ function HomeImage() {
     </Box>
   );
 }
+
 export default HomeImage;

@@ -88,11 +88,10 @@ function Header(props) {
 
   return (
     <>
-      <AppBar sx={{borderRadius: "15px" }} >
+      <AppBar  >
         <Toolbar
           sx={{
             backgroundColor: 'slategray',
-            borderRadius: "15px" 
           }}
         >
           <IconButton

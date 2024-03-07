@@ -16,7 +16,7 @@ function Contact() {
           <img
             src="contact.jpg"
             alt="img"
-            style={{ maxWidth: "100%",width: "100%", height: "auto", borderRadius: "18px" }}
+            style={{ maxWidth: "100%", height: "auto", borderRadius: "18px" }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -30,6 +30,7 @@ function Contact() {
               <Box sx={{ textAlign: "center",  }}>
           <Typography variant="h4">Contact Us</Typography>
         </Box>
+              <Box sx={{paddingTop:'20px',textAlign:'center'}}>
               <TextField
                 sx={{ width: "100%", maxWidth: "400px", mb: 2 }}
                 label="Name"
@@ -56,6 +57,7 @@ function Contact() {
               >
                 Send Message
               </Button>
+              </Box>
             </Box>
           </Grid>
       </Grid>
