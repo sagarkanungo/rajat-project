@@ -68,7 +68,7 @@ function HomeImage() {
           <Box sx={{ padding: " 0 30px 25px", backgroundColor: "" }}>
             <img
               src="Home.jpg"
-              alt="Home about"
+              alt="Home"
               style={{ width: "100%", height: "80vh", borderRadius: "35px" }}
             />
           </Box>

@@ -16,7 +16,7 @@ function Contact() {
           <img
             src="contact.jpg"
             alt="img"
-            style={{ maxWidth: "100%", height: "80vh", borderRadius: "18px" }}
+            style={{ maxWidth: "100%",width: "100%", height: "auto", borderRadius: "18px" }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>

@@ -36,7 +36,7 @@ Website
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         /> */}
       </head>
-      <body className={inter.className}>
+      <body >
         <ThemeProvider theme={theme}>
       <Header/>
         <Box>
