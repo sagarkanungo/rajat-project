@@ -10,11 +10,6 @@ const services = [
     title: "Regular Tax Filing",
     details:
       "We offer professional tax filing services for individuals and businesses. Our experts ensure accurate and timely filing to minimize your tax liabilities.",
-      packages: [
-        { duration: "3 months", price: 6000 },
-        { duration: "6 months", price: 10000 },
-        { duration: "1 year", price: 18000 }
-      ]
   },
   {
     title: "Personalized Accountant/Outsource",
@@ -39,7 +34,7 @@ const services = [
 ];
 
 function HomeServiceSection() {
-  const router=useRouter();
+  const router = useRouter();
   const settings = {
     dots: false,
     infinite: true,
@@ -118,13 +113,18 @@ function HomeServiceSection() {
                   width: "100%",
                   height: "200px", // Fixed height for each card
                   overflow: "hidden",
-                  transition: "transform 0.1s",
+                  borderRadius: 6,
+                  transition: "transform 0.2s",
+                  boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+                  borderColor: "#007bff",
                   "&:hover": {
-                    transform: "scale(1.05)", // Zoom in effect on hover
+                    transform: "scale(1.05)",
+                    boxShadow: "4px 4px 8px rgba(0, 0, 0, 0.3)", // Increases shadow on hover
+                    borderColor: "#007bff",
                   },
                 }}
                 onClick={() => {
-                  router.push('services')
+                  router.push("services");
                 }}
               >
                 <CardContent>
