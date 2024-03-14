@@ -27,6 +27,8 @@ const navItems = [
   { title: "Services", path: "/services" },
   // { title: 'Signup', path: '/signup', },
   { title: "Contact", path: "/contact" },
+  { title: "Login", path: "/login" },
+  { title: "SignUp", path: "/signup" },
 ];
 
 function Header(props) {

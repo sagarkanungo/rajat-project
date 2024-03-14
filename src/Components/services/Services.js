@@ -1,8 +1,20 @@
+'use client'
 import React from "react";
 import { Box, Typography, Divider } from "@mui/material";
 import serviceDetail from "./ServiceDetail";
+import { useRouter } from "next/navigation";
 
-function Services() {
+function Services({setIsLoggedIn}) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  function handelClick(){
+    if (!isLoggedIn) {
+      alert('Please sign up first!');
+    } else {
+      // Redirect or navigate to the next step
+      alert('Redirecting to the package selection page...');
+    }
+  }
   return (
     <Box sx={{ marginTop: { xs: 8, md: 8 }, marginLeft: { xs: 2, md: 4 } }}>
       <Typography
@@ -30,7 +42,9 @@ function Services() {
               marginTop: "10px",
               justifyContent: "center",
               flexWrap: "wrap",
+              
             }}
+            onClick={handelClick}
           >
             {item.packages &&
               item.packages.map((pkg, i) => (

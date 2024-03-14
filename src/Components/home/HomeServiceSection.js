@@ -42,6 +42,8 @@ function HomeServiceSection() {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
     responsive: [
       {
         breakpoint: 1024,
@@ -116,9 +118,9 @@ function HomeServiceSection() {
                   cursor: "pointer",
                   display: "inline-block",
                   width: "100%",
-                  height: "100%",
-                  overflow: "hidden",
+                  height: "auto",
                   borderRadius: 6,
+                  overflow: "hidden",
                   transition: "transform 0.2s",
                   boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
                   borderColor: "#007bff",
@@ -134,9 +136,11 @@ function HomeServiceSection() {
               >
                 <CardContent
                  sx={{
-                  height: "100%", // Set height to 100% to ensure consistent height
+                  height: "200px", // Set height to 100% to ensure consistent height
                   display: "flex",
                   flexDirection: "column",
+                  overflow: "hidden",
+
                 }}
                 >
                   <Typography variant="h6" component="div">
