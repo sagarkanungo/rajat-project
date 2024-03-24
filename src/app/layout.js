@@ -1,18 +1,18 @@
 'use client';
 import { Inter } from "next/font/google";
+import { usePathname} from "next/navigation";
 import Header from '../Components/Header/Header'
 import { Box } from "@mui/material";
 import "./globals.css";
-import { ThemeProvider } from "@emotion/react";
-import theme from '../theme'
+import ContextProvider from '../Components/context/ContextProvider'
 
 const inter = Inter({ subsets: ["latin"] });
-
-
 
 export default function RootLayout({
   children,
 }) {
+  const pathName = usePathname();
+  const shouldShowHeader = !pathName.includes("/dashboard");
   return (
     <html lang="en">
       <head>
@@ -37,13 +37,12 @@ Website
         /> */}
       </head>
       <body >
-        <ThemeProvider theme={theme}>
-      <Header/>
+        <ContextProvider>
+        {shouldShowHeader && <Header />}
         <Box>
         {children}
         </Box>
-        </ThemeProvider>
-
+        </ContextProvider>
       </body>
     </html>
   );

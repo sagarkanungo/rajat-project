@@ -131,7 +131,7 @@ function HomeServiceSection() {
                   },
                 }}
                 onClick={() => {
-                  router.push("services");
+                  router.push("/services");
                 }}
               >
                 <CardContent

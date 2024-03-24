@@ -1,11 +1,16 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { Typography, TextField, Button, Grid, Box,  } from "@mui/material";
+import React, { useState, useEffect, useContext } from "react";
+import { Typography, TextField, Button, Grid, Box } from "@mui/material";
 import { useRouter } from "next/navigation";
 import SectionWrapper from "../SectionWrapper/SectionWrapper";
 import Link from "next/link";
+import { ContextData } from "../context/ContextProvider";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from "../../Firebase";
 
-function Login({setIsLoggedIn}) {
+function Login() {
+  const auth = getAuth(app);
+  const { setIsUserLogin } = useContext(ContextData);
   const router = useRouter();
 
   // State for login credentials
@@ -20,32 +25,41 @@ function Login({setIsLoggedIn}) {
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-
-    const user = storedUsers.find(
-      (user) =>
-        user.email === credentials.email &&
-        user.password === credentials.password
-    );
-
-    if (user) {
-      localStorage.setItem("loggedin", true);
-      localStorage.setItem("loggedInUserName", user.name);
-      router.push("/dashboard");
-    } else {
-      alert("Invalid email or password");
+    try {
+      if (
+        credentials.email === "rajatadmin@gmail.com" &&
+        credentials.password === "rajat@123"
+      ) {
+        console.log("Admin signed in");
+        setIsUserLogin(true);
+        localStorage.setItem("isUserLoggedIn", "true");
+        router.push("/dashboard"); // Redirect admin to dashboard
+      } else {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          credentials.email,
+          credentials.password
+        );
+        // User signed in successfully
+        console.log("User signed in:", userCredential.user);
+        setIsUserLogin(true);
+        localStorage.setItem("isUserLoggedIn", "true");
+        // Redirect or perform any necessary actions upon successful login
+        router.push("/services"); // Redirect to dashboard after login
+      }
+    } catch (error) {
+      console.error("Error signing in:", error.message);
+      // Handle login error (e.g., display error message to the user)
     }
-    setIsLoggedIn(true);
   };
 
   return (
-    <SectionWrapper justify="center" >
+    <SectionWrapper justify="center">
       <Grid container spacing={3} justifyContent="center">
-        
         <Grid item xs={12} sm={6}>
-          <Box padding="12px" justifyContent="space-between" textAlign='center'>
+          <Box padding="12px" justifyContent="space-between" textAlign="center">
             <Typography
               sx={{ fontFamily: "Lato", fontStyle: "normal", fontWeight: 700 }}
               variant="h4"
@@ -90,18 +104,14 @@ function Login({setIsLoggedIn}) {
                   },
                 }}
               />
-              <Button
-                fullWidth
-                type="submit"
-                sx={{color:'gray'}}
-              >
+              <Button fullWidth type="submit" sx={{ color: "gray" }}>
                 Login
               </Button>
             </form>
             <Box sx={{ textAlign: "center", padding: "20px" }}>
               Dont have an Account?
               <Link
-                sx={{ color: "black", paddingLeft: "4px", fontWeight: 700,  }}
+                sx={{ color: "black", paddingLeft: "4px", fontWeight: 700 }}
                 href="/signup"
               >
                 {" "}
