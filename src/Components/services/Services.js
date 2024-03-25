@@ -24,6 +24,7 @@ function Services() {
           textAlign: "center",
           fontWeight: 200,
           textDecoration: "underLine",
+          color:'black'
         }}
       >
         Our Services

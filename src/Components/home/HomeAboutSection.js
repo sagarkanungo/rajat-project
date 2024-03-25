@@ -23,8 +23,8 @@ function HomeImage() {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <Box sx={{ padding: { xs: "24px 0px 0px 10px", sm: "24px 0px 0px 35px" } }}>
-            <Typography variant="h4" sx={{textDecoration:'underline'}}>About us</Typography>
-            <Typography variant="caption">Simplifying Tax and GST Management for You!</Typography>
+            <Typography variant="h4" sx={{textDecoration:'underline',mb:2}}>About us</Typography>
+            <Typography  variant="caption">Simplifying Tax and GST Management for You!</Typography>
             <Typography variant="caption">
               Welcome to our platform, where we&apos;re dedicated to making tax and
               GST management a breeze for individuals and businesses alike. Our

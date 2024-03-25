@@ -37,7 +37,6 @@ function HomeServiceSection() {
   const router = useRouter();
 
   const settings = {
-    // dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
@@ -87,7 +86,7 @@ function HomeServiceSection() {
           width: "80%",
         }}
       >
-        <Typography variant="h5" sx={{ fontSize: { xs: "6vw", sm: "4vw" } }}>
+        <Typography variant="h5" sx={{ fontSize: { xs: "6vw", sm: "4vw" },color:'white' }}>
           Our Services
         </Typography>
         <Typography variant="h6" sx={{ fontSize: { xs: "3vw", sm: "2vw" } }}>
@@ -124,6 +123,7 @@ function HomeServiceSection() {
                   transition: "transform 0.2s",
                   boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
                   borderColor: "#007bff",
+                  mb:2,
                   "&:hover": {
                     transform: "scale(1.05)",
                     boxShadow: "4px 4px 8px rgba(0, 0, 0, 0.3)",

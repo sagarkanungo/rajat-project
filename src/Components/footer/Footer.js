@@ -11,6 +11,7 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
+  Link,
 } from "@mui/material";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
@@ -27,7 +28,7 @@ function Footer() {
         width: "100%",
         height: "auto",
         backgroundColor: "slategray",
-        padding: { xs: "40px 20px", sm: "40px 0",md:'40px 20px 20px 20px' },
+        padding: { xs: "40px 20px", sm: "40px 0", md: "40px 20px 20px 20px" },
       }}
     >
       <Grid container spacing={2}>
@@ -36,9 +37,11 @@ function Footer() {
             About Us
           </Typography>
           <Typography color="white" variant="caption">
-            Get inspired by our curated list of must-visit destinations. Whether
-            dreaming of sandy beaches, historic landmarks, or
-            breathtaking landscapes, start your journey here.
+          At Taxsmart Company, our journey began in a small garage, where our
+                founders, Jane and John Smith, shared a passion for creating
+                innovative solutions to everyday problems. Fueled by their
+                entrepreneurial spirit, they set out to revolutionize the way
+                people interact with technology.
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -46,20 +49,20 @@ function Footer() {
             Services
           </Typography>
           <List>
-            <ListItem  sx={{ paddingLeft: 0 }}>
-              <ListItemText primary="Online Booking" />
+            <ListItem sx={{ paddingLeft: 0 }}>
+              <ListItemText primary="Regular Tax Filing" />
             </ListItem>
             <ListItem sx={{ paddingLeft: 0 }}>
               <ListItemText
                 sx={{ color: "white" }}
-                primary="International Package"
+                primary="Accounting and Bookkeeping Services"
               />
             </ListItem>
             <ListItem sx={{ paddingLeft: 0 }}>
-              <ListItemText sx={{ color: "white" }} primary="Indian package" />
+              <ListItemText sx={{ color: "white" }} primary="Employ Management/PayRoll Solution" />
             </ListItem>
             <ListItem sx={{ paddingLeft: 0 }}>
-              <ListItemText sx={{ color: "white" }} primary="Travel Package" />
+              <ListItemText sx={{ color: "white" }} primary="Income Tax Filing" />
             </ListItem>
           </List>
         </Grid>
@@ -85,7 +88,14 @@ function Footer() {
               </ListItemIcon>
               <ListItemText
                 sx={{ color: "white" }}
-                primary="trvl111@gmail.com"
+                primary={
+                  <Link
+                    href="mailto:rajat111@gmail.com"
+                    sx={{ textDecoration: "none", color: "white" }}
+                  >
+                    rajat111@gmail.com
+                  </Link>
+                }
               />
             </ListItem>
             <ListItem sx={{ paddingLeft: 0 }}>

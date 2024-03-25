@@ -13,7 +13,7 @@ export default function HomeSection1() {
           <img
             src="HomeiMAGE.jpg"
             style={{ width: "100%", height: "auto", filter: "brightness(50%)" }}
-            loading=" lazy"
+            loading="lazy"
           />
           <Box
             style={{

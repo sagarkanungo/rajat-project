@@ -36,7 +36,7 @@ function Header(props) {
     { title: "Home", path: "/" },
     { title: "About", path: "/about" },
     { title: "Services", path: "/services" },
-    { title: "Contact", path: "/contact" },
+    // { title: "Contact", path: "/contact" },
     // { title: "Login", path: "/login" },
   ];
 
@@ -152,7 +152,14 @@ function Header(props) {
                 </Link>
               </MenuItem>
             ))}
-              <MenuItem onClick={handleLoginLogout}>
+              <MenuItem onClick={handleLoginLogout}sx={{
+                 "&:hover": {
+                  backgroundColor: "lightskyblue",
+                  transform: "scale(1.1)", // Zoom effect
+                  transition: "transform 0.2s ease-in-out", // Transition for zoom effect
+                  textDecoration: "underline",
+                },
+              }}>
               {isUserLogin ? "Logout" : "Login"}
             </MenuItem>
           </Box>
