@@ -108,13 +108,13 @@ function Login() {
                 Login
               </Button>
             </form>
-            <Box sx={{ textAlign: "center", padding: "20px" }}>
+            <Box sx={{color: "black", textAlign: "center", padding: "20px" }}>
               Dont have an Account?
               <Link
-                sx={{ color: "black", paddingLeft: "4px", fontWeight: 700 }}
+                sx={{  paddingLeft: "4px", fontWeight: 700 }}
                 href="/signup"
               >
-                {" "}
+                {" "} {" "}
                 Ragister hear{" "}
               </Link>
             </Box>

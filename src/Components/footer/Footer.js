@@ -27,7 +27,7 @@ function Footer() {
         width: "100%",
         height: "auto",
         backgroundColor: "slategray",
-        padding: { xs: "40px 20px", sm: "40px 0" },
+        padding: { xs: "40px 20px", sm: "40px 0",md:'40px 20px 20px 20px' },
       }}
     >
       <Grid container spacing={2}>
@@ -46,8 +46,8 @@ function Footer() {
             Services
           </Typography>
           <List>
-            <ListItem sx={{ paddingLeft: 0 }}>
-              <ListItemText sx={{ color: "white" }} primary="Online Booking" />
+            <ListItem  sx={{ paddingLeft: 0 }}>
+              <ListItemText primary="Online Booking" />
             </ListItem>
             <ListItem sx={{ paddingLeft: 0 }}>
               <ListItemText

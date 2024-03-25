@@ -9,7 +9,7 @@ const AboutSection = () => {
         <Box sx={{ position: "relative" }}>
         <img src="about.jpg" alt="about" style={{ width: "100%", height: "auto", filter: "brightness(50%)" }} ></img>
         <Box sx={{ textAlign: "center", textDecoration: "underLine" }}>
-          <Typography variant="h4">About Us</Typography>
+          <Typography variant="h4" padding='8px'>About Us</Typography>
         </Box>
         <Box sx={{ padding: "12px 40px" }}>
           <Box sx={{ justifyContent: "flex-start", padding: "24px" }}>

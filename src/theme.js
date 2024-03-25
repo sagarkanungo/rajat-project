@@ -145,6 +145,7 @@ const theme = createTheme({
       },
     },
     MuiTypography: {
+      
       styleOverrides: {
         root: {
           fontFamily: "Lato",
@@ -159,14 +160,14 @@ const theme = createTheme({
           fontWeight: 400,
         },
         body1: {
-          color: "#818B83",
+          color: "white",
           fontSize: "1rem",
           fontWeight: 400,
         },
         body2: {
           color: "#1C211D",
           fontSize: "1rem",
-          fontWeight: 700,
+          fontWeight: 400,
           lineHeight: "24px",
           letterSpacing: "-0.48px",
         },
@@ -215,6 +216,7 @@ const theme = createTheme({
           fontFamily: "Taviraj",
           letterSpacing: "-1.17px",
           fontSize: "39px",
+          color:'black',
           ["@media (max-width:600px)"]: {
             fontSize: "31px",
           },
@@ -225,7 +227,9 @@ const theme = createTheme({
           letterSpacing: "-0.6px",
         },
       },
+     
     },
+    
     MuiLink: {
       defaultProps: {
         fontWeight: 700,

@@ -41,7 +41,7 @@ function Services() {
               <Typography variant="h4" gutterBottom>
                 {item.title}
               </Typography>
-              <Typography variant="body1" gutterBottom>
+              <Typography variant="body2" gutterBottom>
                 {item.details}
               </Typography>
               <Box
@@ -79,18 +79,18 @@ function Services() {
                         {pkg.name}
                       </Typography>
                       <Typography
-                        style={{ fontSize: "1.2em", marginBottom: 10 }}
+                       variant="h6" 
                       >
                         {pkg.duration}
                       </Typography>
-                      <Typography variant="body1" gutterBottom>
+                      <Typography variant="body2" gutterBottom>
                         {pkg.price} /-
                       </Typography>
                       <ul style={{ textAlign: "left", paddingLeft: 0 }}>
                         {pkg.features &&
                           Array.isArray(pkg.features) &&
                           pkg.features.map((feature, j) => (
-                            <li key={j}>{feature}</li>
+                            <li style={{color:'black'}} key={j}>{feature}</li>
                           ))}
                       </ul>
                     </Box>

@@ -280,13 +280,13 @@ function Signup() {
               </Grid>
             </Grid>
           </form>
-          <Box sx={{ textAlign: "center", padding: "20px" }}>
+          <Box sx={{color: "black", textAlign: "center", padding: "20px" }}>
             Already have an Account?
             <Link
-              sx={{ color: "black", paddingLeft: "4px", fontWeight: 700 }}
+              sx={{ paddingLeft: "4px", fontWeight: 700, }}
               href="/login"
             >
-              {" "}
+              {" "}{" "}
               Login hear{" "}
             </Link>
           </Box>
