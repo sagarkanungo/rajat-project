@@ -23,9 +23,9 @@ function HomeImage() {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <Box sx={{ padding: { xs: "24px 0px 0px 10px", sm: "24px 0px 0px 35px" } }}>
-            <Typography variant="h4">About us</Typography>
-            <Typography>Simplifying Tax and GST Management for You!</Typography>
-            <Typography>
+            <Typography variant="h4" sx={{textDecoration:'underline'}}>About us</Typography>
+            <Typography variant="caption">Simplifying Tax and GST Management for You!</Typography>
+            <Typography variant="caption">
               Welcome to our platform, where we&apos;re dedicated to making tax and
               GST management a breeze for individuals and businesses alike. Our
               mission is to empower you with the tools and knowledge necessary
@@ -38,7 +38,7 @@ function HomeImage() {
                 my: { xs: "24px", sm: "24px 0px" },
               }}
             />
-            <Typography>
+            <Typography variant="caption">
               At <span style={{ fontWeight: 700 }}>TaxSmart</span>, we
               understand the challenges you face when it comes to understanding
               and complying with tax regulations. That&apos;s why we&apos;ve developed a
