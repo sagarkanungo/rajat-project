@@ -9,9 +9,11 @@ import { v4 as uuidv4 } from 'uuid';
 import {app} from '../../Firebase'
 import { getDatabase,ref,set } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { ContextData } from "../context/ContextProvider";
 
 
 function Signup() {
+  const{setUserId} = useContext(ContextData)
   const router = useRouter();
   const auth = getAuth(app);
   const [formData, setFormData] = useState({
@@ -48,8 +50,8 @@ function Signup() {
   
       // Save user data to Firebase Realtime Database
       await set(ref(db, `users/${newUser.id}`), newUser);
-      console.log("User data saved successfully.");
-  
+      console.log("User data saved successfully.",userCredential);
+      setUserId(newUser.id)
       // Reset form fields
       setFormData({
         name: "",
@@ -70,43 +72,7 @@ function Signup() {
   };
   
 
-    // // Retrieve existing users data from local storage
-    // const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-
-    // // Create a new user object
-    // const newUser = {
-    //   id: uuidv4(),
-    //   name: formData.name,
-    //   email: formData.email,
-    //   password: formData.password,
-    //   dob: formData.dob,
-    //   country: formData.country,
-    //   city: formData.city,
-    //   state: formData.state,
-    //   phoneNumber: formData.phoneNumber,
-    // };
-
-    // // Add the new user to the existing array of users
-    // const updatedUsers = [...existingUsers, newUser];
-
-    // // Save the updated array of users to local storage
-    // localStorage.setItem("users", JSON.stringify(updatedUsers));
-
-    // // Reset form fields
-    // setFormData({
-    //   name: "",
-    //   email: "",
-    //   password: "",
-    //   dob: "",
-    //   country:'',
-    //   city:'',
-    //   state:'',
-    //   phoneNumber:'',
-    // });
-
-    // Redirect to the login page
-    // router.push("/login");
-  // };
+    
 
   return (
     <>
@@ -149,6 +115,7 @@ function Signup() {
                   onChange={handleInputChange}
                   variant="outlined"
                   margin="normal"
+                  required
                 />
               </Grid>
               <Grid item xs={6} sm={6}>

@@ -33,7 +33,7 @@ function Dashboard() {
             >
               Dashboard
             </Typography>
-            <Typography sx={{ letterSpacing: "-0.48px" }}>
+            <Typography sx={{ letterSpacing: "-0.48px",color:'black' }}>
               Welcome  ✌️, Rajat!
             </Typography>
           </Box>

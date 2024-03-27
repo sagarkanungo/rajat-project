@@ -50,7 +50,9 @@ function Login() {
         router.push("/services"); // Redirect to dashboard after login
       }
     } catch (error) {
-      console.error("Error signing in:", error.message);
+      alert("invelid email and password", error.message);
+
+      console.log("Error signing in:", error.message);
       // Handle login error (e.g., display error message to the user)
     }
   };

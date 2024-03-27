@@ -11,6 +11,7 @@ import {
   Button,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import DeleteIcon from '@mui/icons-material/Delete';
 import { getDatabase, onValue, ref, remove } from "firebase/database";
 import { app } from "../../Firebase";
 
@@ -32,6 +33,7 @@ function Favourite() {
       }
     });
   }, []);
+  console.log("userData:", userData);
   function handelDelete(id) {
     const db = getDatabase(app);
     const userRef = ref(db, "users/" + id);
@@ -56,29 +58,53 @@ function Favourite() {
           <Table border="2px">
             <TableHead sx={{ backgroundColor: "#25372A" }}>
               <TableRow>
-                <TableCell sx={{ color: "white" }}>Full Name</TableCell>
-                <TableCell sx={{ color: "white" }}>Email</TableCell>
-                <TableCell sx={{ color: "white" }}>DOB</TableCell>
-                <TableCell sx={{ color: "white" }}>Country</TableCell>
-                <TableCell sx={{ color: "white" }}>City</TableCell>
-                <TableCell sx={{ color: "white" }}>State </TableCell>
-                <TableCell sx={{ color: "white" }}>Mobile</TableCell>
-                <TableCell sx={{ color: "white" }}>Remove</TableCell>
-
+                <TableCell sx={{ color: "white",textAlign:'center' }}>Full Name</TableCell>
+                <TableCell sx={{ color: "white",textAlign:'center' }}>Email</TableCell>
+                <TableCell sx={{ color: "white",textAlign:'center' }}>DOB</TableCell>
+                <TableCell sx={{ color: "white",textAlign:'center' }}>Country</TableCell>
+                <TableCell sx={{ color: "white",textAlign:'center' }}>City</TableCell>
+                <TableCell sx={{ color: "white",textAlign:'center' }}>State </TableCell>
+                <TableCell sx={{ color: "white",textAlign:'center' }}>Mobile</TableCell>
+                <TableCell sx={{ color: "white",textAlign:'center' }}>Package</TableCell>
+              
+                <TableCell sx={{ color: "white",textAlign:'center' }}>Remove</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {userData.map((item) => (
                 <TableRow key={item.id}>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.email}</TableCell>
-                  <TableCell>{item.dob}</TableCell>
-                  <TableCell>{item.country}</TableCell>
-                  <TableCell>{item.city}</TableCell>
-                  <TableCell>{item.state}</TableCell>
-                  <TableCell>{item.phoneNumber}</TableCell>
-                  <Button sx={{background:'none',border:'none'}} variant="text" onClick={() => handelDelete(item.id)}>
-                    Delete
+                  <TableCell sx={{textAlign:'center'}}>{item.name}</TableCell>
+                  <TableCell sx={{textAlign:'center'}}>{item.email}</TableCell>
+                  <TableCell sx={{textAlign:'center'}}>{item.dob}</TableCell>
+                  <TableCell sx={{textAlign:'center'}}>{item.country}</TableCell>
+                  <TableCell sx={{textAlign:'center'}}>{item.city}</TableCell>
+                  <TableCell sx={{textAlign:'center'}}>{item.state}</TableCell>
+                  <TableCell sx={{textAlign:'center'}}>{item.phoneNumber}</TableCell>
+                  <TableCell sx={{textAlign:'center'}}>
+                    {/* Render package details if available */}
+                    {item.userPackageDetail && (
+                      <ul>
+                        {Object.entries(item.userPackageDetail).map(
+                          ([service, packageDetail]) => (
+                            <li key={service}>
+                              <strong>{service}:</strong>{" "}
+                              {packageDetail.selectedPackage}
+                             
+                            </li>
+                          )
+                        )}
+                      </ul>
+                    )}
+                  </TableCell>
+                 
+                  <Button
+                    sx={{ color:'red' , textAlign:'center',border:0,'& .MuiSvgIcon-root': { // Use the class to target the icon
+                      fontSize: 28, // Adjust the font size as per your requirement
+                    },}}
+                    variant="text"
+                    onClick={() => handelDelete(item.id)}
+                  >
+                   <DeleteIcon />
                   </Button>
                 </TableRow>
               ))}

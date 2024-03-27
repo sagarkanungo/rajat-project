@@ -1,21 +1,32 @@
 "use client";
-import React, { useContext } from "react";
-import { Box, Typography, Divider } from "@mui/material";
+import { Box, Typography, Divider, Drawer } from "@mui/material";
 import serviceDetail from "./ServiceDetail";
-import { useRouter } from "next/navigation";
+import SkeletonPulseLoader from "../services/SkeletonPulseLoader";
+import PackageSelectFor from "../services/PackageSelectFor";
+import { useContext, useEffect } from "react";
 import { ContextData } from "../context/ContextProvider";
-import SkeletonPulseLoader from '../services/SkeletonPulseLoader'
 
 function Services() {
-  const { loading,isUserLogin } = useContext(ContextData);
-  function handelClick() {
+  const { loading, isUserLogin, openDrawer, setOpenDrawer } =
+    useContext(ContextData);
+
+  useEffect(() => {
+    console.log("Drawer state updated:", openDrawer);
+  }, [openDrawer]);
+
+  function handleDrawerOpen() {
     if (!isUserLogin) {
-      alert("Please sign up first!");
+      alert("Please login first!");
     } else {
-      // Redirect or navigate to the next step
-      alert("success");
+      setOpenDrawer(true);
     }
   }
+  function handleDrawerClose() {
+    console.log("Before closing drawer:", openDrawer);
+    setOpenDrawer(false);
+    console.log("After closing drawer:", openDrawer);
+  }
+
   return (
     <Box sx={{ marginTop: { xs: 8, md: 8 }, marginLeft: { xs: 2, md: 4 } }}>
       <Typography
@@ -24,14 +35,16 @@ function Services() {
           textAlign: "center",
           fontWeight: 200,
           textDecoration: "underLine",
-          color:'black'
+          color: "black",
         }}
       >
         Our Services
       </Typography>
-      {loading
-        ? <SkeletonPulseLoader/>
-        : serviceDetail.map((item, index) => (
+      {loading ? (
+        <SkeletonPulseLoader />
+      ) : (
+        <>
+          {serviceDetail.map((item, index) => (
             <Box
               key={index}
               sx={{
@@ -53,7 +66,7 @@ function Services() {
                   justifyContent: "center",
                   flexWrap: "wrap",
                 }}
-                onClick={handelClick}
+                onClick={handleDrawerOpen}
               >
                 {item.packages &&
                   item.packages.map((pkg, i) => (
@@ -79,11 +92,7 @@ function Services() {
                       <Typography variant="h5" gutterBottom>
                         {pkg.name}
                       </Typography>
-                      <Typography
-                       variant="h6" 
-                      >
-                        {pkg.duration}
-                      </Typography>
+                      <Typography variant="h6">{pkg.duration}</Typography>
                       <Typography variant="body2" gutterBottom>
                         {pkg.price} /-
                       </Typography>
@@ -91,7 +100,9 @@ function Services() {
                         {pkg.features &&
                           Array.isArray(pkg.features) &&
                           pkg.features.map((feature, j) => (
-                            <li style={{color:'black'}} key={j}>{feature}</li>
+                            <li style={{ color: "black" }} key={j}>
+                              {feature}
+                            </li>
                           ))}
                       </ul>
                     </Box>
@@ -106,8 +117,19 @@ function Services() {
               />
             </Box>
           ))}
+          <Drawer
+            anchor="top"
+            open={openDrawer}
+            onClose={handleDrawerClose}
+            variant="temporary"
+          >
+            <PackageSelectFor handleDrawerClose={handleDrawerClose} />
+          </Drawer>
+        </>
+      )}
     </Box>
   );
 }
+
 
 export default Services;
