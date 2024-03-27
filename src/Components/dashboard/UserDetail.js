@@ -9,6 +9,10 @@ import {
   Typography,
   Grid,
   Button,
+  Paper,
+  TableContainer,
+  TablePagination,
+  Box
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -17,6 +21,8 @@ import { app } from "../../Firebase";
 
 function Favourite() {
   const [userData, setUserData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [rowsPerPage] = useState(10);
 
   useEffect(() => {
     const db = getDatabase(app);
@@ -39,6 +45,13 @@ function Favourite() {
     const userRef = ref(db, "users/" + id);
     remove(userRef);
   }
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const indexOfLastRow = page * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = userData.slice(indexOfFirstRow, indexOfLastRow);
 
   return (
     <>
@@ -51,10 +64,13 @@ function Favourite() {
       >
         <Grid item xs={12}>
           <Typography sx={{ textAlign: "center" }} variant="h5">
-            User Detail
+            Users Detail
           </Typography>
         </Grid>
         <Grid item xs={12}>
+        <Paper>
+            <TableContainer>
+              <Box style={{ overflowX: "auto" }}>
           <Table border="2px">
             <TableHead sx={{ backgroundColor: "#25372A" }}>
               <TableRow>
@@ -66,12 +82,12 @@ function Favourite() {
                 <TableCell sx={{ color: "white",textAlign:'center' }}>State </TableCell>
                 <TableCell sx={{ color: "white",textAlign:'center' }}>Mobile</TableCell>
                 <TableCell sx={{ color: "white",textAlign:'center' }}>Package</TableCell>
-              
                 <TableCell sx={{ color: "white",textAlign:'center' }}>Remove</TableCell>
+                
               </TableRow>
             </TableHead>
             <TableBody>
-              {userData.map((item) => (
+              {currentRows.map((item) => (
                 <TableRow key={item.id}>
                   <TableCell sx={{textAlign:'center'}}>{item.name}</TableCell>
                   <TableCell sx={{textAlign:'center'}}>{item.email}</TableCell>
@@ -85,17 +101,18 @@ function Favourite() {
                     {item.userPackageDetail && (
                       <ul>
                         {Object.entries(item.userPackageDetail).map(
-                          ([service, packageDetail]) => (
+                          ([service, packageDetail,adharNumber]) => (
                             <li key={service}>
                               <strong>{service}:</strong>{" "}
                               {packageDetail.selectedPackage}
-                             
                             </li>
                           )
                         )}
                       </ul>
                     )}
                   </TableCell>
+                  
+
                  
                   <Button
                     sx={{ color:'red' , textAlign:'center',border:0,'& .MuiSvgIcon-root': { // Use the class to target the icon
@@ -110,8 +127,21 @@ function Favourite() {
               ))}
             </TableBody>
           </Table>
+          </Box>
+          </TableContainer>
+          </Paper>
         </Grid>
       </Grid>
+      <Grid item xs={12}>
+          <TablePagination
+            rowsPerPageOptions={[10]}
+            component="div"
+            count={userData.length}
+            rowsPerPage={rowsPerPage}
+            page={page - 1}
+            onPageChange={handleChangePage}
+          />
+        </Grid>
     </>
   );
 }

@@ -39,7 +39,7 @@ const serviceDetail = [
       ],
     },
     {
-      title: "Employ Management/PayRoll Solution",
+      title: "Employ Management",
       details:
         `The solution provides a centralized database to store and manage employee information,
          including personal details, contact information, employment history, and performance evaluations.

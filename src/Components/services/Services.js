@@ -9,6 +9,7 @@ import { ContextData } from "../context/ContextProvider";
 function Services() {
   const { loading, isUserLogin, openDrawer, setOpenDrawer } =
     useContext(ContextData);
+    
 
   useEffect(() => {
     console.log("Drawer state updated:", openDrawer);
@@ -92,7 +93,7 @@ function Services() {
                       <Typography variant="h5" gutterBottom>
                         {pkg.name}
                       </Typography>
-                      <Typography variant="h6">{pkg.duration}</Typography>
+                      <Typography variant="h5">{pkg.duration}</Typography>
                       <Typography variant="body2" gutterBottom>
                         {pkg.price} /-
                       </Typography>
