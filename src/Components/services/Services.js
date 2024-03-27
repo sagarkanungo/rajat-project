@@ -93,7 +93,7 @@ function Services() {
                       <Typography variant="h5" gutterBottom>
                         {pkg.name}
                       </Typography>
-                      <Typography variant="h5">{pkg.duration}</Typography>
+                      <Typography variant="body1">{pkg.duration}</Typography>
                       <Typography variant="body2" gutterBottom>
                         {pkg.price} /-
                       </Typography>
