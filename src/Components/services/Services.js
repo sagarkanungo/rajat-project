@@ -11,9 +11,7 @@ function Services() {
     useContext(ContextData);
     
 
-  useEffect(() => {
-    console.log("Drawer state updated:", openDrawer);
-  }, [openDrawer]);
+ 
 
   function handleDrawerOpen() {
     if (!isUserLogin) {

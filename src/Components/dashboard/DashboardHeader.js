@@ -13,14 +13,17 @@ import Typography from "@mui/material/Typography";
 import { MenuItem } from "@mui/material";
 import { ContextData } from "../context/ContextProvider";
 import { useRouter } from "next/navigation";
+import TextField from "@mui/material/TextField";
+import SearchIcon from "@mui/icons-material/Search";
+import { InputAdornment } from "@mui/material";
 
 const drawerWidth = 240;
 
-function Header(props) {
-  const router =useRouter()
+function Header({ handleSearch, searchQuery }, props) {
+  const router = useRouter();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const { isUserLogin,setIsUserLogin } = React.useContext(ContextData);
+  const { isUserLogin, setIsUserLogin } = React.useContext(ContextData);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -29,7 +32,7 @@ function Header(props) {
   const handleLoginLogout = () => {
     if (isUserLogin) {
       localStorage.removeItem("loggedin");
-      setIsUserLogin(false); 
+      setIsUserLogin(false);
       router.push("/login");
     } else {
       // User is not logged in, redirect to login page
@@ -49,9 +52,11 @@ function Header(props) {
       </Typography>
       <Divider />
       <List>
-       
-          <ListItemButton sx={{justifyContent:'center'}}  onClick={handleLoginLogout}>
-          <Typography sx={{ color: "#1A271D", }}>Logout  </Typography>
+        <ListItemButton
+          sx={{ justifyContent: "center" }}
+          onClick={handleLoginLogout}
+        >
+          <Typography sx={{ color: "#1A271D" }}>Logout </Typography>
         </ListItemButton>
       </List>
     </Box>
@@ -81,15 +86,42 @@ function Header(props) {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "center", sm: "block" } }}
+            sx={{
+              flexGrow: 1,
+              display: { xs: "center", sm: "block" },
+              alignItems: "center",
+            }}
           >
             TaxSmart
           </Typography>
+          <TextField
+            fullWidth
+            variant="outlined"
+            value={searchQuery}
+            onChange={(e) => handleSearch(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon sx={{fontSize:'30px'}}/>
+                </InputAdornment>
+              ),
+            }}
+            autoComplete="off" 
+            sx={{
+              width: "200px",
+              backgroundColor: "white",
+              borderRadius: "28px",
+              "& .MuiInputBase-root": {
+                borderRadius: "28px", // Adjust border radius to match the outer radius
+                height:'38px',
+                '& fieldset': {
+                  border: 'none', // remove the border
+                },
+              }
+            }}
+          />
           <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-           
-              <MenuItem onClick={handleLoginLogout}>
-              Logout
-            </MenuItem>
+            <MenuItem onClick={handleLoginLogout}>Logout</MenuItem>
           </Box>
         </Toolbar>
       </AppBar>

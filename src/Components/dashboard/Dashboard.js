@@ -7,6 +7,12 @@ import UserDetail from '../dashboard/UserDetail'
 
 function Dashboard() {
     const [userName, setUserName] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const handleSearch = (query) => {
+      setSearchQuery(query);
+    };
+
     useEffect(() => {
         // Retrieve logged-in user's name from local storage
         const loggedInUserName = localStorage.getItem("loggedInUserName");
@@ -16,7 +22,7 @@ function Dashboard() {
       }, []);
   return (
     <>
-    <DashboardHeader/>
+    <DashboardHeader handleSearch={handleSearch}  searchQuery={searchQuery}  />
     <Box padding={{ xs: "16px", md: "80px" }}>
         <Box sx={{ display: "flex", flexDirection: "row" }}>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -40,7 +46,7 @@ function Dashboard() {
        
         </Box>
         </Box>
-<UserDetail/>
+<UserDetail searchQuery={searchQuery}/>
     </>
   )
 }
