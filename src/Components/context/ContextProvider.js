@@ -24,10 +24,21 @@ export default function RootLayout({ children }) {
   const [userId, setUserId] = useState(null); 
 
   useEffect(() => {
-    // Check if the user was previously logged in
     const isUserLoggedIn = localStorage.getItem("isUserLoggedIn") === "true";
     setIsUserLogin(isUserLoggedIn);
+
+    // Check if userId is stored in localStorage and set it in the context
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+    }
   }, []);
+
+  const updateUserId = (id) => {
+    // Set userId in localStorage
+    localStorage.setItem("userId", id);
+    setUserId(id);
+  };
 
   const ContextDataValue = {
     loading, // Pass loading state to context
@@ -37,7 +48,7 @@ export default function RootLayout({ children }) {
     openDrawer,
     setOpenDrawer,
     userId,
-    setUserId
+    setUserId:updateUserId,
   };
   setTimeout(() => {
     setLoading(false);
