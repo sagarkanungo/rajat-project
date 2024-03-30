@@ -14,7 +14,7 @@ import { ContextData } from "../context/ContextProvider";
 import {useContext} from 'react'
 
 function HomeImage() {
-  const{isSticky} = useContext(ContextData)
+  const{isSticky,isMounted} = useContext(ContextData)
 
   const router = useRouter();
 
@@ -22,12 +22,9 @@ function HomeImage() {
     <Box
       sx={{
         paddingTop: { xs: "20px", sm: "50px" },
-        transition: "transform 0.3s ease, left 0.5s ease", // Smooth transitions for transform and left properties
-        transform: isSticky ? "translateY(-50px)" : "translateY(0)",
-        position: 'relative', // Ensure relative positioning
-        left: isSticky ? "calc(50% - 50vw)" : "50%", // Adjust the left position based on isSticky
-        maxWidth: '1200px', // Limit the maximum width of the content
-        margin: '0 auto', // Center the box horizontally
+        opacity: isMounted ? 1 : 0,
+            transition: "opacity 1s ease-in-out, transform 1s ease-in-out",
+            transform: isMounted ? "translateX(0)" : "translateX(-100%)",
       }}
     >
       <Grid container spacing={3}>

@@ -6,7 +6,7 @@ import { useContext, useEffect } from "react";
 import { ContextData } from "../context/ContextProvider";
 
 const AboutSection = () => {
-  const { isSticky } = useContext(ContextData);
+  const { isSticky,isMounted } = useContext(ContextData);
   return (
     <>
       <Box sx={{ paddingTop: "50px" }}>
@@ -34,9 +34,9 @@ const AboutSection = () => {
             </Typography>
           </Box>
           <Box sx={{ padding: "12px 40px",
-         transition: "transform 0.3s ease, left 0.5s ease", // Smooth transitions for transform and left properties
-         transform: isSticky ? "translateX(-40px)" : "translateY(20)",
-         left: isSticky ? "calc(50% - 200px)" : "50%",
+        opacity: isMounted ? 1 : 0,
+        transition: "opacity 1s ease-in-out, transform 1s ease-in-out",
+        transform: isMounted ? "translateX(0)" : "translateX(-100%)",
        
         }}>
             <Box sx={{ justifyContent: "flex-start", padding: "24px" }}>

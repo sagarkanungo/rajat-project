@@ -7,7 +7,7 @@ import { useContext, useEffect } from "react";
 import { ContextData } from "../context/ContextProvider";
 
 export default function HomeSection1() {
-  const { isSticky } = useContext(ContextData);
+  const { isSticky,isMounted } = useContext(ContextData);
   const router = useRouter();
 
   return (
@@ -16,8 +16,9 @@ export default function HomeSection1() {
         <Box
           sx={{
             position: "relative",
-            transition: "transform 0.3s ease", // Smooth transition for the transform property
-            transform: isSticky ? "translateY(-50px)" : "translateY(0)",
+            opacity: isMounted ? 1 : 0,
+            transition: "opacity 1s ease-in-out, transform 1s ease-in-out",
+            transform: isMounted ? "translateX(0)" : "translateX(-100%)",
           }}
         >
           <img
@@ -35,8 +36,7 @@ export default function HomeSection1() {
               color: "#fff",
               fontSize: "24px",
               width: "80%",
-              transition: "left 0.5s ease", // Smooth transition for left property
-              left: isSticky ? "calc(50% - 200px)" : "50%", // Adjust the value b
+              
             }}
           >
             <Box sx={{ paddingTop: "80px" }}>
