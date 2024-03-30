@@ -1,29 +1,49 @@
+"use client";
 import React from "react";
 import { Typography, Container, Box } from "@mui/material";
 import Footer from "../footer/Footer";
+import { useContext, useEffect } from "react";
+import { ContextData } from "../context/ContextProvider";
 
 const AboutSection = () => {
+  const { isSticky } = useContext(ContextData);
   return (
     <>
       <Box sx={{ paddingTop: "50px" }}>
-        <Box sx={{ position: "relative" }}>
+        <Box
+          sx={{
+            position: "relative",
+          
+          }}
+        >
           <img
             src="about.jpg"
             alt="about"
             loading="lazy"
             style={{ width: "100%", height: "auto", filter: "brightness(50%)" }}
           ></img>
-          <Box sx={{ textAlign: "center", textDecoration: "underLine" }}>
+          <Box
+            sx={{
+              textAlign: "center",
+              textDecoration: "underLine",
+             
+            }}
+          >
             <Typography variant="h4" padding="8px">
               About Us
             </Typography>
           </Box>
-          <Box sx={{ padding: "12px 40px" }}>
+          <Box sx={{ padding: "12px 40px",
+         transition: "transform 0.3s ease, left 0.5s ease", // Smooth transitions for transform and left properties
+         transform: isSticky ? "translateX(-40px)" : "translateY(20)",
+         left: isSticky ? "calc(50% - 200px)" : "50%",
+       
+        }}>
             <Box sx={{ justifyContent: "flex-start", padding: "24px" }}>
               <Typography variant="h4">Our History</Typography>
               <Typography variant="caption">
-                At Taxsmart Company, our journey began in a small garage, where our
-                founders, Jane and John Smith, shared a passion for creating
+                At Taxsmart Company, our journey began in a small garage, where
+                our founders, Jane and John Smith, shared a passion for creating
                 innovative solutions to everyday problems. Fueled by their
                 entrepreneurial spirit, they set out to revolutionize the way
                 people interact with technology.

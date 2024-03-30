@@ -9,9 +9,6 @@ import { ContextData } from "../context/ContextProvider";
 function Services() {
   const { loading, isUserLogin, openDrawer, setOpenDrawer } =
     useContext(ContextData);
-    
-
- 
 
   function handleDrawerOpen() {
     if (!isUserLogin) {

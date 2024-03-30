@@ -15,6 +15,9 @@ export const ContextData = createContext({
   setOpenDrawer:() => {} ,
   userId:null,
   setUserId:(e) => e,
+  isSticky:false,
+  setIsSticky:() => {},
+  isMounted:false
 });
 
 export default function RootLayout({ children }) {
@@ -22,6 +25,9 @@ export default function RootLayout({ children }) {
   const [isUserLogin, setIsUserLogin] = useState(false)
   const [openDrawer, setOpenDrawer] = useState(false);
   const [userId, setUserId] = useState(null); 
+  const [isSticky, setIsSticky] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
 
   useEffect(() => {
     const isUserLoggedIn = localStorage.getItem("isUserLoggedIn") === "true";
@@ -39,7 +45,26 @@ export default function RootLayout({ children }) {
     localStorage.setItem("userId", id);
     setUserId(id);
   };
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const threshold = 200; // Adjust this value based on your requirement
 
+      if (scrollPosition > threshold) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+ 
   const ContextDataValue = {
     loading, // Pass loading state to context
     setLoading ,
@@ -49,10 +74,15 @@ export default function RootLayout({ children }) {
     setOpenDrawer,
     userId,
     setUserId:updateUserId,
+    isSticky,
+    isMounted
   };
-  setTimeout(() => {
-    setLoading(false);
-  }, 2000);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+      setIsMounted(true); // Set isMounted to true after loading
+    }, 2000);
+  }, []);
   
 
   return (

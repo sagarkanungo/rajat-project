@@ -9,15 +9,25 @@ import {
   ListItemText,
   Divider,
 } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { useRouter, } from "next/navigation";
+import { ContextData } from "../context/ContextProvider";
+import {useContext} from 'react'
 
 function HomeImage() {
+  const{isSticky} = useContext(ContextData)
+
   const router = useRouter();
 
   return (
     <Box
       sx={{
         paddingTop: { xs: "20px", sm: "50px" },
+        transition: "transform 0.3s ease, left 0.5s ease", // Smooth transitions for transform and left properties
+        transform: isSticky ? "translateY(-50px)" : "translateY(0)",
+        position: 'relative', // Ensure relative positioning
+        left: isSticky ? "calc(50% - 50vw)" : "50%", // Adjust the left position based on isSticky
+        maxWidth: '1200px', // Limit the maximum width of the content
+        margin: '0 auto', // Center the box horizontally
       }}
     >
       <Grid container spacing={3}>

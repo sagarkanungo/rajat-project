@@ -3,13 +3,23 @@
 import React from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useContext, useEffect } from "react";
+import { ContextData } from "../context/ContextProvider";
 
 export default function HomeSection1() {
-  const router = useRouter()
+  const { isSticky } = useContext(ContextData);
+  const router = useRouter();
+
   return (
     <>
       <Box sx={{ paddingTop: "50px" }}>
-        <Box sx={{ position: "relative" }}>
+        <Box
+          sx={{
+            position: "relative",
+            transition: "transform 0.3s ease", // Smooth transition for the transform property
+            transform: isSticky ? "translateY(-50px)" : "translateY(0)",
+          }}
+        >
           <img
             src="HomeiMAGE.jpg"
             style={{ width: "100%", height: "auto", filter: "brightness(50%)" }}
@@ -25,6 +35,8 @@ export default function HomeSection1() {
               color: "#fff",
               fontSize: "24px",
               width: "80%",
+              transition: "left 0.5s ease", // Smooth transition for left property
+              left: isSticky ? "calc(50% - 200px)" : "50%", // Adjust the value b
             }}
           >
             <Box sx={{ paddingTop: "80px" }}>

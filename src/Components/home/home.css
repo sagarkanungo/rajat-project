@@ -1,0 +1,13 @@
+.animate-text {
+    animation: slideFromLeft 1.5s forwards; /* Animation duration and timing */
+  }
+  
+  @keyframes slideFromLeft {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  

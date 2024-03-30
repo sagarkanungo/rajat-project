@@ -10,7 +10,7 @@ import { app } from "../../Firebase";
 
 function Login() {
   const auth = getAuth(app);
-  const { setIsUserLogin } = useContext(ContextData);
+  const { setIsUserLogin,isMounted } = useContext(ContextData);
   const router = useRouter();
 
   // State for login credentials
@@ -61,7 +61,13 @@ function Login() {
   
   return (
     <SectionWrapper justify="center">
-      <Grid container spacing={3} justifyContent="center">
+      <Grid container spacing={3} justifyContent="center"
+       sx={{
+        opacity: isMounted ? 1 : 0,
+        transition: "opacity 1s ease-in-out, transform 1s ease-in-out",
+        transform: isMounted ? "translateX(0)" : "translateX(-100%)",
+      }}
+      >
         <Grid item xs={12} sm={6}>
           <Box padding="12px" justifyContent="space-between" textAlign="center">
             <Typography
