@@ -34,9 +34,7 @@ const AboutSection = () => {
             </Typography>
           </Box>
           <Box sx={{ padding: "12px 40px",
-        opacity: isMounted ? 1 : 0,
-        transition: "opacity 1s ease-in-out, transform 1s ease-in-out",
-        transform: isMounted ? "translateX(0)" : "translateX(-100%)",
+       
        
         }}>
             <Box sx={{ justifyContent: "flex-start", padding: "24px" }}>

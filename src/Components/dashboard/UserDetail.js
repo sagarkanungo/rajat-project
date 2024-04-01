@@ -20,7 +20,7 @@ import React, { useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getDatabase, onValue, ref, remove } from "firebase/database";
 import { app } from "../../Firebase";
-function Favourite({  searchQuery }) {
+function UserDetail({  searchQuery }) {
   const [userData, setUserData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [page, setPage] = useState(1);
@@ -75,10 +75,9 @@ function Favourite({  searchQuery }) {
         spacing={1}
         alignItems="center"
         justifyContent="center"
-        padding={2}
       >
         <Grid item xs={12}>
-          <Typography sx={{ textAlign: "center" }} variant="h5">
+          <Typography align="center" variant="h5">
             Users Detail
           </Typography>
         </Grid>
@@ -197,4 +196,4 @@ function Favourite({  searchQuery }) {
   );
 }
 
-export default Favourite;
+export default UserDetail;

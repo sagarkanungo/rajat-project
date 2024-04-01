@@ -41,12 +41,10 @@ function PackageSelectFor({ handleDrawerClose }) {
     const db = getDatabase(app);
 
     try {
-      const newUserBooking = {
+      const newUserData = {
         selectedService: formData.selectedService,
         selectedPackage: formData.selectedPackage,
-        adharNumber: formData.adharNumber,
-        panNumber: formData.panNumber,
-        fullAdress: formData.fullAdress,
+      
       };
 
       // Get user's existing data if any
@@ -60,7 +58,7 @@ function PackageSelectFor({ handleDrawerClose }) {
       // Merge existing user data with the new booking
       const updatedUserData = {
         ...existingUserData,
-        [formData.selectedService]: newUserBooking,
+        [formData.selectedService]: newUserData,
       };
 
       // Update user data with the merged data
@@ -91,24 +89,25 @@ function PackageSelectFor({ handleDrawerClose }) {
     <>
       <Box
         sx={{
+          width: "80%",
+          maxWidth: "500px",
+          margin: "0 auto",
+          padding: "20px",
+          borderRadius: "18px",
           position: "fixed",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: "50%",
-          height: "auto",
-          overflow: "auto",
           backgroundColor: "white",
           boxShadow: 24,
-          p: 5,
-          borderRadius: "18px",
+          zIndex: 9999, // Ensure it's on top of other content
         }}
       >
         <Typography variant="h6" gutterBottom>
           Select Package
         </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <Typography variant="caption">Select Service</Typography>
             <FormControl fullWidth sx={{ mb: 2 }}>
               <Select
@@ -125,7 +124,7 @@ function PackageSelectFor({ handleDrawerClose }) {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <Typography variant="caption">Select Package</Typography>
             <FormControl fullWidth sx={{ mb: 2 }}>
               <Select

@@ -22,9 +22,7 @@ function HomeImage() {
     <Box
       sx={{
         paddingTop: { xs: "20px", sm: "50px" },
-        opacity: isMounted ? 1 : 0,
-            transition: "opacity 1s ease-in-out, transform 1s ease-in-out",
-            transform: isMounted ? "translateX(0)" : "translateX(-100%)",
+    
       }}
     >
       <Grid container spacing={3}>

@@ -10,7 +10,7 @@ import { app } from "../../Firebase";
 
 function Login() {
   const auth = getAuth(app);
-  const { setIsUserLogin,isMounted } = useContext(ContextData);
+  const { setIsUserLogin } = useContext(ContextData);
   const router = useRouter();
 
   // State for login credentials
@@ -57,21 +57,18 @@ function Login() {
     }
   };
 
- 
-  
   return (
     <SectionWrapper justify="center">
-      <Grid container spacing={3} justifyContent="center"
-       sx={{
-        opacity: isMounted ? 1 : 0,
-        transition: "opacity 1s ease-in-out, transform 1s ease-in-out",
-        transform: isMounted ? "translateX(0)" : "translateX(-100%)",
-      }}
-      >
+      <Grid container spacing={3} justifyContent="center">
         <Grid item xs={12} sm={6}>
-          <Box padding="12px" justifyContent="space-between" textAlign="center">
+          <Box
+            padding="12px"
+            justifyContent="space-between"
+            textAlign="center"
+           
+          >
             <Typography
-              sx={{ fontFamily: "Lato", fontStyle: "normal", fontWeight: 700 }}
+              sx={{ fontFamily: "Lato", fontStyle: "normal", fontWeight: 700, }}
               variant="h4"
             >
               Welcome To TaxSmart
@@ -118,13 +115,10 @@ function Login() {
                 Login
               </Button>
             </form>
-            <Box sx={{color: "black", textAlign: "center", padding: "20px" }}>
+            <Box sx={{ color: "black", textAlign: "center", padding: "20px" }}>
               Dont have an Account?
-              <Link
-                sx={{  paddingLeft: "4px", fontWeight: 700 }}
-                href="/signup"
-              >
-                {" "} {" "}
+              <Link sx={{ paddingLeft: "4px", fontWeight: 700 }} href="/signup">
+                {" "}
                 Ragister hear{" "}
               </Link>
             </Box>

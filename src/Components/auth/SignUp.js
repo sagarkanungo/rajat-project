@@ -81,11 +81,7 @@ function Signup() {
           padding="12px"
           justifyContent="space-between"
           textAlign="center"
-          sx={{
-            opacity: isMounted ? 1 : 0,
-            transition: "opacity 1s ease-in-out, transform 1s ease-in-out",
-            transform: isMounted ? "translateX(0)" : "translateX(-100%)",
-          }}
+          
         >
           <Typography
             sx={{
@@ -109,7 +105,7 @@ function Signup() {
           </Typography>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3} justifyContent="center">
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   sx={{
                     "& .MuiOutlinedInput-root": {
@@ -127,7 +123,7 @@ function Signup() {
                   required
                 />
               </Grid>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   sx={{
                     "& .MuiOutlinedInput-root": {
@@ -144,7 +140,7 @@ function Signup() {
                   margin="normal"
                 />
               </Grid>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   sx={{
                     "& .MuiOutlinedInput-root": {
@@ -162,15 +158,15 @@ function Signup() {
                   margin="normal"
                 />
               </Grid>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   sx={{
                     "& .MuiOutlinedInput-root": {
                       borderRadius: "18px",
                       backgroundColor: "white",
                     },
+                   
                   }}
-                  placeholder="Date of Birth"
                   fullWidth
                   name="dob"
                   value={formData.dob}
@@ -180,7 +176,7 @@ function Signup() {
                   margin="normal"
                 />
               </Grid>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   sx={{
                     "& .MuiOutlinedInput-root": {
@@ -197,7 +193,7 @@ function Signup() {
                   margin="normal"
                 />
               </Grid>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   sx={{
                     "& .MuiOutlinedInput-root": {
@@ -214,7 +210,7 @@ function Signup() {
                   margin="normal"
                 />
               </Grid>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   sx={{
                     "& .MuiOutlinedInput-root": {
@@ -231,7 +227,7 @@ function Signup() {
                   margin="normal"
                 />
               </Grid>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   sx={{
                     "& .MuiOutlinedInput-root": {
