@@ -20,17 +20,18 @@ import Button from "@mui/material/Button";
 import Link from "next/link";
 import { ContextData } from "../context/ContextProvider";
 import { useRouter } from "next/navigation";
-import { getAuth, signInWithEmailAndPassword,signOut } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { app } from "../../Firebase";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const drawerWidth = 240;
 
 function Header(props) {
   const auth = getAuth(app);
-  const router =useRouter()
+  const router = useRouter();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const { isUserLogin,setIsUserLogin } = React.useContext(ContextData);
-
+  const { isUserLogin, setIsUserLogin } = React.useContext(ContextData);
 
   const navItems = [
     { title: "Home", path: "/" },
@@ -53,7 +54,11 @@ function Header(props) {
       // Remove login state from localStorage
       localStorage.removeItem("isUserLoggedIn");
       // Redirect to login page or any other page as needed
-      router.push("/login");
+      toast.success("Logout successfully!");
+      // Redirect admin to dashboard after a delay of 1 second
+      setTimeout(() => {
+        router.push("/login");
+      }, 1000);
     } catch (error) {
       console.error("Error signing out:", error.message);
       // Handle sign out error
@@ -93,8 +98,13 @@ function Header(props) {
             </Link>
           </ListItem>
         ))}
-          <ListItemButton sx={{justifyContent:'center'}}  onClick={handleLoginLogout}>
-          <Typography sx={{ color: "#1A271D", }}>{isUserLogin ? "Logout" : "Login"} </Typography>
+        <ListItemButton
+          sx={{ justifyContent: "center" }}
+          onClick={handleLoginLogout}
+        >
+          <Typography sx={{ color: "#1A271D" }}>
+            {isUserLogin ? "Logout" : "Login"}{" "}
+          </Typography>
         </ListItemButton>
       </List>
     </Box>
@@ -105,6 +115,7 @@ function Header(props) {
 
   return (
     <>
+      <ToastContainer />
       <AppBar>
         <Toolbar
           sx={{
@@ -152,14 +163,17 @@ function Header(props) {
                 </Link>
               </MenuItem>
             ))}
-              <MenuItem onClick={handleLoginLogout}sx={{
-                 "&:hover": {
+            <MenuItem
+              onClick={handleLoginLogout}
+              sx={{
+                "&:hover": {
                   backgroundColor: "lightskyblue",
                   transform: "scale(1.1)", // Zoom effect
                   transition: "transform 0.2s ease-in-out", // Transition for zoom effect
                   textDecoration: "underline",
                 },
-              }}>
+              }}
+            >
               {isUserLogin ? "Logout" : "Login"}
             </MenuItem>
           </Box>

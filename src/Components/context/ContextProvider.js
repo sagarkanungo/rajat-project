@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
 
     setTimeout(() => {
       setLoading(false); // Update loading state after delay
-    }, 1000);
+    }, 2000);
    
   }, []);
 

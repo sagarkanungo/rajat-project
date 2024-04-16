@@ -7,10 +7,13 @@ import Link from "next/link";
 import { ContextData } from "../context/ContextProvider";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "../../Firebase";
+import CircularProgress from "@mui/material/CircularProgress";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const auth = getAuth(app);
-  const { setIsUserLogin } = useContext(ContextData);
+  const { setIsUserLogin, loading,setLoading } = useContext(ContextData);
   const router = useRouter();
 
   // State for login credentials
@@ -27,6 +30,7 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true)
     try {
       if (
         credentials.email === "rajatadmin@gmail.com" &&
@@ -35,7 +39,11 @@ function Login() {
         console.log("Admin signed in");
         setIsUserLogin(true);
         localStorage.setItem("isUserLoggedIn", "true");
-        router.push("/dashboard"); // Redirect admin to dashboard
+        toast.success("Admin logged in successfully!");
+        // Redirect admin to dashboard after a delay of 1 second
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 1000);
       } else {
         const userCredential = await signInWithEmailAndPassword(
           auth,
@@ -46,29 +54,30 @@ function Login() {
         console.log("User signed in:", userCredential.user);
         setIsUserLogin(true);
         localStorage.setItem("isUserLoggedIn", "true");
-        // Redirect or perform any necessary actions upon successful login
-        router.push("/services"); // Redirect to dashboard after login
+        toast.success("Logged in successfully!");
+      // Redirect to services page after a delay of 1 second
+      setTimeout(() => {
+        router.push("/services");
+      }, 1000);
       }
     } catch (error) {
-      alert("invelid email and password", error.message);
-
-      console.log("Error signing in:", error.message);
+      toast.error("Invalid email or password");
       // Handle login error (e.g., display error message to the user)
     }
+    finally {
+      setLoading(false); // Set loading back to false after login process completes
+    }
   };
+  
 
   return (
     <SectionWrapper justify="center">
+    <ToastContainer /> 
       <Grid container spacing={3} justifyContent="center">
         <Grid item xs={12} sm={6}>
-          <Box
-            padding="12px"
-            justifyContent="space-between"
-            textAlign="center"
-           
-          >
+          <Box padding="12px" justifyContent="space-between" textAlign="center">
             <Typography
-              sx={{ fontFamily: "Lato", fontStyle: "normal", fontWeight: 700, }}
+              sx={{ fontFamily: "Lato", fontStyle: "normal", fontWeight: 700 }}
               variant="h4"
             >
               Welcome To TaxSmart
@@ -111,9 +120,15 @@ function Login() {
                   },
                 }}
               />
-              <Button fullWidth type="submit" sx={{ color: "gray" }}>
-                Login
-              </Button>
+              {loading ? (
+                <Box sx={{ display: "flex" , justifyContent:'center', mt:'4px' }}>
+                  <CircularProgress />
+                </Box>
+              ) : (
+                <Button fullWidth type="submit" sx={{ color: "gray" }}>
+                  Login
+                </Button>
+              )}
             </form>
             <Box sx={{ color: "black", textAlign: "center", padding: "20px" }}>
               Dont have an Account?
