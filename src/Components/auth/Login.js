@@ -72,7 +72,7 @@ function Login() {
 
   return (
     <SectionWrapper justify="center">
-    <ToastContainer /> 
+    <ToastContainer autoClose={3000} /> 
       <Grid container spacing={3} justifyContent="center">
         <Grid item xs={12} sm={6}>
           <Box padding="12px" justifyContent="space-between" textAlign="center">
