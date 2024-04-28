@@ -10,6 +10,8 @@ import { app } from "../../Firebase";
 import { getDatabase, ref, set } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { ContextData } from "../context/ContextProvider";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
   const { setUserId, isMounted } = useContext(ContextData);
@@ -68,6 +70,7 @@ function Signup() {
       });
 
       // Redirect to the login page
+      // toast.success("signup successfully!");
       router.push("/login");
     } catch (error) {
       console.error("Error signing up:", error.message);

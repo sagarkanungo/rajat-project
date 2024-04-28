@@ -16,6 +16,8 @@ import { useRouter } from "next/navigation";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import { InputAdornment } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const drawerWidth = 240;
 
@@ -33,6 +35,7 @@ function Header({ handleSearch, searchQuery }, props) {
     if (isUserLogin) {
       localStorage.removeItem("loggedin");
       setIsUserLogin(false);
+      toast.success("Logout successfully!");
       router.push("/login");
     } else {
       // User is not logged in, redirect to login page
@@ -67,6 +70,7 @@ function Header({ handleSearch, searchQuery }, props) {
 
   return (
     <>
+      <ToastContainer />
       <AppBar>
         <Toolbar
           sx={{

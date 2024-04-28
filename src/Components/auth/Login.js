@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const auth = getAuth(app);
-  const { setIsUserLogin, loading,setLoading } = useContext(ContextData);
+  const { setIsUserLogin, loading, setLoading } = useContext(ContextData);
   const router = useRouter();
 
   // State for login credentials
@@ -30,7 +30,7 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     try {
       if (
         credentials.email === "rajatadmin@gmail.com" &&
@@ -55,24 +55,22 @@ function Login() {
         setIsUserLogin(true);
         localStorage.setItem("isUserLoggedIn", "true");
         toast.success("Logged in successfully!");
-      // Redirect to services page after a delay of 1 second
-      setTimeout(() => {
-        router.push("/services");
-      }, 1000);
+        // Redirect to services page after a delay of 1 second
+        setTimeout(() => {
+          router.push("/services");
+        }, 1000);
       }
     } catch (error) {
       toast.error("Invalid email or password");
       // Handle login error (e.g., display error message to the user)
-    }
-    finally {
+    } finally {
       setLoading(false); // Set loading back to false after login process completes
     }
   };
-  
 
   return (
     <SectionWrapper justify="center">
-    <ToastContainer autoClose={3000} /> 
+      {router.pathname === "/login" && <ToastContainer autoClose={3000} />}
       <Grid container spacing={3} justifyContent="center">
         <Grid item xs={12} sm={6}>
           <Box padding="12px" justifyContent="space-between" textAlign="center">
@@ -121,7 +119,9 @@ function Login() {
                 }}
               />
               {loading ? (
-                <Box sx={{ display: "flex" , justifyContent:'center', mt:'4px' }}>
+                <Box
+                  sx={{ display: "flex", justifyContent: "center", mt: "4px" }}
+                >
                   <CircularProgress />
                 </Box>
               ) : (
