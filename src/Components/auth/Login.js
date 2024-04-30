@@ -28,41 +28,86 @@ function Login() {
     setCredentials({ ...credentials, [name]: value });
   };
 
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   try {
+  //     if (
+  //       credentials.email === "rajatadmin@gmail.com" &&
+  //       credentials.password === "rajat@123"
+  //     ) {
+  //       console.log("Admin signed in");
+  //       setIsUserLogin(true);
+  //       localStorage.setItem("isUserLoggedIn", "true");
+  //       toast.success("Admin logged in successfully!");
+  //       // Redirect admin to dashboard after a delay of 1 second
+  //       setTimeout(() => {
+  //         router.push("/dashboard");
+  //       }, 1000);
+  //     } else {
+  //       const userCredential = await signInWithEmailAndPassword(
+  //         auth,
+  //         credentials.email,
+  //         credentials.password
+  //       );
+  //       // User signed in successfully
+  //       console.log("User signed in:", userCredential.user);
+  //       setIsUserLogin(true);
+  //       localStorage.setItem("isUserLoggedIn", "true");
+  //       toast.success("Logged in successfully!");
+  //       // Redirect to services page after a delay of 1 second
+  //       setTimeout(() => {
+  //         router.push("/services");
+  //       }, 1000);
+  //     }
+  //   } catch (error) {
+  //     toast.error("Invalid email or password");
+  //     // Handle login error (e.g., display error message to the user)
+  //   } finally {
+  //     setLoading(false); // Set loading back to false after login process completes
+  //   }
+  // };
+
+  // Import Firebase authentication method
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      if (
-        credentials.email === "rajatadmin@gmail.com" &&
-        credentials.password === "rajat@123"
-      ) {
-        console.log("Admin signed in");
+      // Authenticate admin using Firebase signInWithEmailAndPassword method
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        credentials.email, // Use the email provided in the credentials object
+        credentials.password // Use the password provided in the credentials object
+      );
+
+      // Check if the logged-in user is admin
+      if (credentials.email === "rajatadmin@gmail.com") {
+        // Admin signed in successfully
+        console.log("Admin signed in:", userCredential.user);
         setIsUserLogin(true);
         localStorage.setItem("isUserLoggedIn", "true");
         toast.success("Admin logged in successfully!");
+
         // Redirect admin to dashboard after a delay of 1 second
         setTimeout(() => {
           router.push("/dashboard");
         }, 1000);
       } else {
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          credentials.email,
-          credentials.password
-        );
-        // User signed in successfully
+        // Regular user signed in successfully
         console.log("User signed in:", userCredential.user);
         setIsUserLogin(true);
         localStorage.setItem("isUserLoggedIn", "true");
         toast.success("Logged in successfully!");
+
         // Redirect to services page after a delay of 1 second
         setTimeout(() => {
           router.push("/services");
         }, 1000);
       }
     } catch (error) {
-      toast.error("Invalid email or password");
       // Handle login error (e.g., display error message to the user)
+      toast.error("Invalid email or password");
     } finally {
       setLoading(false); // Set loading back to false after login process completes
     }
