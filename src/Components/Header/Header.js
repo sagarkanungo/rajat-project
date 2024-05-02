@@ -54,7 +54,9 @@ function Header(props) {
       // Remove login state from localStorage
       localStorage.removeItem("isUserLoggedIn");
       // Redirect to login page or any other page as needed
-      toast.success("Logout successfully!");
+      if (isUserLogin) {
+        toast.success("Logout successfully!");
+      }
       // Redirect admin to dashboard after a delay of 1 second
       setTimeout(() => {
         router.push("/login");
