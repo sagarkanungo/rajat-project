@@ -26,23 +26,47 @@ function UserDetail({  searchQuery }) {
   const [page, setPage] = useState(1);
   const [rowsPerPage] = useState(10);
 
+  // useEffect(() => {
+  //   const db = getDatabase(app);
+  //   const userRef = ref(db, "users");
+  //   onValue(userRef, (snapshot) => {
+  //     const data = snapshot.val();
+  //     if (data) {
+  //       const dataArray = Object.values(data); // Convert object to array
+  //       setUserData(dataArray);
+  //       setFilteredData(dataArray);
+  //     } else {
+  //       // Handle case when data is empty
+  //       setUserData([]);
+  //       setFilteredData([]);
+  //       console.log("No data available");
+  //     }
+  //   });
+  // }, []);
   useEffect(() => {
-    const db = getDatabase(app);
-    const userRef = ref(db, "users");
-    onValue(userRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        const dataArray = Object.values(data); // Convert object to array
-        setUserData(dataArray);
-        setFilteredData(dataArray);
-      } else {
-        // Handle case when data is empty
-        setUserData([]);
-        setFilteredData([]);
-        console.log("No data available");
-      }
-    });
+    const storedData = localStorage.getItem('userData');
+    if (storedData) {
+      setUserData(JSON.parse(storedData));
+      setFilteredData(JSON.parse(storedData));
+    } else {
+      const db = getDatabase(app);
+      const userRef = ref(db, "users");
+      onValue(userRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          const dataArray = Object.values(data);
+          setUserData(dataArray);
+          setFilteredData(dataArray);
+          localStorage.setItem('userData', JSON.stringify(dataArray));
+        } else {
+          setUserData([]);
+          setFilteredData([]);
+          console.log("No data available");
+        }
+      });
+    }
   }, []);
+  
   console.log("userData:", userData);
   function handelDelete(id) {
     const db = getDatabase(app);

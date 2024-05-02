@@ -10,10 +10,11 @@ import { app } from "../../Firebase";
 import CircularProgress from "@mui/material/CircularProgress";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { get, getDatabase, ref } from "firebase/database";
 
 function Login() {
   const auth = getAuth(app);
-  const { setIsUserLogin, loading, setLoading } = useContext(ContextData);
+  const { setIsUserLogin, loading, setLoading ,setUserId} = useContext(ContextData);
   const router = useRouter();
 
   // State for login credentials
@@ -67,43 +68,95 @@ function Login() {
   //   }
   // };
 
-  // Import Firebase authentication method
 
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   try {
+  //     const userCredential = await signInWithEmailAndPassword(
+  //       auth,
+  //       credentials.email,
+  //       credentials.password
+  //     );
+  //     const userId = userCredential.user.uid;
+  //     console.log(userId,'------------------->')
+  //     setUserId(userId);
+  //     if (credentials.email === "rajatadmin@gmail.com") {
+  //       console.log("Admin signed in:", userCredential.user);
+  //       setIsUserLogin(true);
+  //       localStorage.setItem("isUserLoggedIn", "true");
+  //       toast.success("Admin logged in successfully!");
+
+  //       setTimeout(() => {
+  //         router.push("/dashboard");
+  //       }, 1000);
+  //     } else {
+  //       console.log("User signed in:", userCredential.user);
+  //       setIsUserLogin(true);
+  //       localStorage.setItem("isUserLoggedIn", "true");
+  //       toast.success("Logged in successfully!");
+
+  //       setTimeout(() => {
+  //         router.push("/services");
+  //       }, 1000);
+  //     }
+  //   } catch (error) {
+  //     toast.error("Invalid email or password");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
+      console.log("Logging in with credentials:", credentials);
       const userCredential = await signInWithEmailAndPassword(
         auth,
         credentials.email,
         credentials.password
       );
-
+      const userId = userCredential.user.uid;
+      setUserId(userId);
+  
+      // Check if the logged-in user is an admin
       if (credentials.email === "rajatadmin@gmail.com") {
         console.log("Admin signed in:", userCredential.user);
         setIsUserLogin(true);
         localStorage.setItem("isUserLoggedIn", "true");
         toast.success("Admin logged in successfully!");
-
         setTimeout(() => {
           router.push("/dashboard");
         }, 1000);
       } else {
-        console.log("User signed in:", userCredential.user);
-        setIsUserLogin(true);
-        localStorage.setItem("isUserLoggedIn", "true");
-        toast.success("Logged in successfully!");
-
-        setTimeout(() => {
-          router.push("/services");
-        }, 1000);
+        // Fetch user data from Firebase
+        const db = getDatabase(app);
+        const userRef = ref(db, `users/${userId}`);
+        const userSnapshot = await get(userRef);
+  
+        if (userSnapshot.exists()) {
+          console.log("User signed in:", userCredential.user);
+          setIsUserLogin(true);
+          localStorage.setItem("isUserLoggedIn", "true");
+          toast.success("Logged in successfully!");
+          setTimeout(() => {
+            router.push("/services");
+          }, 1000);
+        } else {
+          console.error("User data not found");
+          toast.error("User data not found");
+        }
       }
     } catch (error) {
+      console.error("Error logging in:", error);
       toast.error("Invalid email or password");
     } finally {
       setLoading(false);
     }
   };
+  
+  
+  
 
   return (
     <SectionWrapper justify="center">

@@ -48,7 +48,7 @@ function PackageSelectFor({ handleDrawerClose }) {
       };
 
       // Get user's existing data if any
-      const userPackageRef = ref(db, `users/${userId}/userPackageDetail`);
+      const userPackageRef = ref(db, `users/${userId}`);
       const userPackageSnapshot = await get(userPackageRef);
       let existingUserData = {};
       if (userPackageSnapshot.exists()) {
@@ -58,11 +58,14 @@ function PackageSelectFor({ handleDrawerClose }) {
       // Merge existing user data with the new booking
       const updatedUserData = {
         ...existingUserData,
-        [formData.selectedService]: newUserData,
+        userPackageDetail: {
+          ...(existingUserData.userPackageDetail || {}),
+          [formData.selectedService]: newUserData,
+        },
       };
 
       // Update user data with the merged data
-      await update(ref(db, `users/${userId}/userPackageDetail`), updatedUserData);
+      await update(ref(db, `users/${userId}`), updatedUserData);
       console.log("User booking data saved successfully.");
 
       // Reset form fields
