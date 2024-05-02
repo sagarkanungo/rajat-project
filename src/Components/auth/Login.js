@@ -22,7 +22,6 @@ function Login() {
     password: "",
   });
 
-  // Update credentials on input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
@@ -74,42 +73,35 @@ function Login() {
     e.preventDefault();
     setLoading(true);
     try {
-      // Authenticate admin using Firebase signInWithEmailAndPassword method
       const userCredential = await signInWithEmailAndPassword(
         auth,
-        credentials.email, // Use the email provided in the credentials object
-        credentials.password // Use the password provided in the credentials object
+        credentials.email,
+        credentials.password
       );
 
-      // Check if the logged-in user is admin
       if (credentials.email === "rajatadmin@gmail.com") {
-        // Admin signed in successfully
         console.log("Admin signed in:", userCredential.user);
         setIsUserLogin(true);
         localStorage.setItem("isUserLoggedIn", "true");
         toast.success("Admin logged in successfully!");
 
-        // Redirect admin to dashboard after a delay of 1 second
         setTimeout(() => {
           router.push("/dashboard");
         }, 1000);
       } else {
-        // Regular user signed in successfully
         console.log("User signed in:", userCredential.user);
         setIsUserLogin(true);
         localStorage.setItem("isUserLoggedIn", "true");
         toast.success("Logged in successfully!");
 
-        // Redirect to services page after a delay of 1 second
         setTimeout(() => {
           router.push("/services");
         }, 1000);
       }
     } catch (error) {
-      // Handle login error (e.g., display error message to the user)
       toast.error("Invalid email or password");
     } finally {
-      setLoading(false); // Set loading back to false after login process completes
+      setLoading(false);
     }
   };
 
