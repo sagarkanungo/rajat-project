@@ -26,47 +26,24 @@ function UserDetail({  searchQuery }) {
   const [page, setPage] = useState(1);
   const [rowsPerPage] = useState(10);
 
-  // useEffect(() => {
-  //   const db = getDatabase(app);
-  //   const userRef = ref(db, "users");
-  //   onValue(userRef, (snapshot) => {
-  //     const data = snapshot.val();
-  //     if (data) {
-  //       const dataArray = Object.values(data); // Convert object to array
-  //       setUserData(dataArray);
-  //       setFilteredData(dataArray);
-  //     } else {
-  //       // Handle case when data is empty
-  //       setUserData([]);
-  //       setFilteredData([]);
-  //       console.log("No data available");
-  //     }
-  //   });
-  // }, []);
   useEffect(() => {
-    const storedData = localStorage.getItem('userData');
-    if (storedData) {
-      setUserData(JSON.parse(storedData));
-      setFilteredData(JSON.parse(storedData));
-    } else {
-      const db = getDatabase(app);
-      const userRef = ref(db, "users");
-      onValue(userRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-          const dataArray = Object.values(data);
-          setUserData(dataArray);
-          setFilteredData(dataArray);
-          localStorage.setItem('userData', JSON.stringify(dataArray));
-        } else {
-          setUserData([]);
-          setFilteredData([]);
-          console.log("No data available");
-        }
-      });
-    }
+    const db = getDatabase(app);
+    const userRef = ref(db, "users");
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const dataArray = Object.values(data); // Convert object to array
+        setUserData(dataArray);
+        setFilteredData(dataArray);
+      } else {
+        // Handle case when data is empty
+        setUserData([]);
+        setFilteredData([]);
+        console.log("No data available");
+      }
+    });
   }, []);
-  
+
   console.log("userData:", userData);
   function handelDelete(id) {
     const db = getDatabase(app);
@@ -77,8 +54,10 @@ function UserDetail({  searchQuery }) {
     // Existing code...
     const filtered = userData.filter(
       (user) =>
-        (user.name && user.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        (user.email && user.email.toLowerCase().includes(searchQuery.toLowerCase()))
+        (user.name &&
+          user.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (user.email &&
+          user.email.toLowerCase().includes(searchQuery.toLowerCase()))
     );
     setFilteredData(filtered);
     setPage(1); // Reset page when search query changes
@@ -89,29 +68,22 @@ function UserDetail({  searchQuery }) {
 
   const indexOfLastRow = page * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
- const currentRows = filteredData.slice(indexOfFirstRow, indexOfLastRow);
-;
-
+  const currentRows = filteredData.slice(indexOfFirstRow, indexOfLastRow);
   return (
     <>
-      <Grid
-        container
-        spacing={1}
-        alignItems="center"
-        justifyContent="center"
-      >
+      <Grid container spacing={1} alignItems="center" justifyContent="center">
         <Grid item xs={12}>
           <Typography align="center" variant="h5">
             Users Detail
           </Typography>
         </Grid>
-       
+
         <Grid item xs={12}>
           <Paper>
-            <TableContainer >
+            <TableContainer>
               <Box style={{ overflowX: "auto" }}>
                 <Table border="2px">
-                  <TableHead sx={{ backgroundColor: "slategray",}}>
+                  <TableHead sx={{ backgroundColor: "slategray" }}>
                     <TableRow>
                       <TableCell sx={{ color: "white", textAlign: "center" }}>
                         Full Name

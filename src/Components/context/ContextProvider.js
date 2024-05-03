@@ -15,7 +15,7 @@ export const ContextData = createContext({
   setOpenDrawer:() => {} ,
   userId:null,
   setUserId:(e) => e,
- 
+  
 });
 
 export default function RootLayout({ children }) {
@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
 
     setTimeout(() => {
       setLoading(false); // Update loading state after delay
-    }, 2000);
+    }, 1000);
    
   }, []);
 
@@ -47,7 +47,7 @@ export default function RootLayout({ children }) {
     localStorage.setItem("userId", id);
     setUserId(id);
   };
-
+  
 
  
   const ContextDataValue = {

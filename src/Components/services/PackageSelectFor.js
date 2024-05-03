@@ -19,9 +19,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import Dilog from '../Dialog/Dilog'
 
 function PackageSelectFor({ handleDrawerClose }) {
-  const { userId } = useContext(ContextData);
+  const { userId,} = useContext(ContextData);
   const [open, setOpen] = React.useState(false);
   const [formData, setFormData] = useState({
     selectedService: "",
@@ -177,7 +178,7 @@ function PackageSelectFor({ handleDrawerClose }) {
           </Button>
         </Box>
       </Box>
-      <Dialog
+      {/* <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
@@ -197,7 +198,14 @@ function PackageSelectFor({ handleDrawerClose }) {
             Close
           </Button>
         </DialogActions>
-      </Dialog>
+      </Dialog> */}
+      <Dilog
+      open={open}
+      onClose={handleClose}
+      content=" Your Package is successfully Sent to Administration, we Will Call
+      you for Furthur Detail And Check"
+      title="Use Google's location service?"
+      />
     </>
   );
 }

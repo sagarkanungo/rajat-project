@@ -45,6 +45,6 @@ body {
   border: 3px solid var(--background-start-rgb); /* Change to your desired border color */
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--foreground-rgb); /* Change to your desired hover color */
-}
+/* ::-webkit-scrollbar-thumb:hover {
+  background-color: var(--foreground-rgb); 
+} */

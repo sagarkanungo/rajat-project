@@ -3,16 +3,17 @@ import { Box, Typography, Divider, Drawer } from "@mui/material";
 import serviceDetail from "./ServiceDetail";
 import SkeletonPulseLoader from "../services/SkeletonPulseLoader";
 import PackageSelectFor from "../services/PackageSelectFor";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ContextData } from "../context/ContextProvider";
-
+import Dilog from '../Dialog/Dilog'
 function Services() {
-  const { loading, isUserLogin, openDrawer, setOpenDrawer } =
+  const { loading, isUserLogin, openDrawer, setOpenDrawer} =
     useContext(ContextData);
+    const [loginDialogOpen, setLoginDialogOpen] = useState(false);
 
   function handleDrawerOpen() {
     if (!isUserLogin) {
-      alert("Please login first!");
+      setLoginDialogOpen(true)
     } else {
       setOpenDrawer(true);
     }
@@ -22,8 +23,11 @@ function Services() {
     setOpenDrawer(false);
     console.log("After closing drawer:", openDrawer);
   }
-
+  const handleClose = () => {
+    setLoginDialogOpen(false);
+  };
   return (
+    <>
     <Box sx={{ marginTop: { xs: 8, md: 8 }, marginLeft: { xs: 2, md: 4 } }}>
       <Typography
         variant="h3"
@@ -62,7 +66,7 @@ function Services() {
                   justifyContent: "center",
                   flexWrap: "wrap",
                 }}
-                onClick={handleDrawerOpen}
+               
               >
                 {item.packages &&
                   item.packages.map((pkg, i) => (
@@ -84,6 +88,7 @@ function Services() {
                           boxShadow: "4px 4px 8px rgba(0, 0, 0, 0.3)",
                         },
                       }}
+                      onClick={handleDrawerOpen}
                     >
                       <Typography variant="h5" gutterBottom>
                         {pkg.name}
@@ -123,7 +128,15 @@ function Services() {
           </Drawer>
         </>
       )}
+      
     </Box>
+      <Dilog
+      open={loginDialogOpen}
+      onClose={handleClose}
+      content="Please Login First"
+      title="Please Login First!"
+      />
+</>
   );
 }
 
