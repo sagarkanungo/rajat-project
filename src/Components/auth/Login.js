@@ -14,7 +14,7 @@ import { get, getDatabase, ref } from "firebase/database";
 
 function Login() {
   const auth = getAuth(app);
-  const { setIsUserLogin, loading, setLoading ,setUserId} = useContext(ContextData);
+  const { setIsUserLogin, loading, setLoading ,setUserId,setUserData} = useContext(ContextData);
   const router = useRouter();
 
   // State for login credentials
@@ -118,7 +118,7 @@ function Login() {
       );
       const userId = userCredential.user.uid;
       setUserId(userId);
-  
+  console.log(userId)
       // Check if the logged-in user is an admin
       if (credentials.email === "rajatadmin@gmail.com") {
         console.log("Admin signed in:", userCredential.user);
@@ -133,14 +133,17 @@ function Login() {
         const db = getDatabase(app);
         const userRef = ref(db, `users/${userId}`);
         const userSnapshot = await get(userRef);
-  
+        const userData = userSnapshot.val();
+        setUserData(userData); 
         if (userSnapshot.exists()) {
           console.log("User signed in:", userCredential.user);
+          console.log("User name:", userData.name);
           setIsUserLogin(true);
           localStorage.setItem("isUserLoggedIn", "true");
           toast.success("Logged in successfully!");
           setTimeout(() => {
             router.push("/services");
+           
           }, 1000);
         } else {
           console.error("User data not found");
@@ -164,6 +167,7 @@ function Login() {
       <Grid container spacing={3} justifyContent="center">
         <Grid item xs={12} sm={6}>
           <Box padding="12px" justifyContent="space-between" textAlign="center">
+
             <Typography
               sx={{ fontFamily: "Lato", fontStyle: "normal", fontWeight: 700 }}
               variant="h4"

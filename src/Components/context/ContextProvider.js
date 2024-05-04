@@ -15,7 +15,8 @@ export const ContextData = createContext({
   setOpenDrawer:() => {} ,
   userId:null,
   setUserId:(e) => e,
-  
+  userData:null,
+  setUserData:(e) => e,
 });
 
 export default function RootLayout({ children }) {
@@ -23,7 +24,7 @@ export default function RootLayout({ children }) {
   const [isUserLogin, setIsUserLogin] = useState(false)
   const [openDrawer, setOpenDrawer] = useState(false);
   const [userId, setUserId] = useState(null); 
-
+  const [userData, setUserData] = useState(null);
 
 
   useEffect(() => {
@@ -34,6 +35,11 @@ export default function RootLayout({ children }) {
     const storedUserId = localStorage.getItem("userId");
     if (storedUserId) {
       setUserId(storedUserId);
+    }
+
+    const storedUserData = localStorage.getItem("userData");
+    if (storedUserData) {
+      setUserData(JSON.parse(storedUserData));
     }
 
     setTimeout(() => {
@@ -48,6 +54,10 @@ export default function RootLayout({ children }) {
     setUserId(id);
   };
   
+  const updateUserData = (data) => {
+    localStorage.setItem("userData", JSON.stringify(data)); // Store userData in local storage
+    setUserData(data);
+  };
 
  
   const ContextDataValue = {
@@ -59,6 +69,8 @@ export default function RootLayout({ children }) {
     setOpenDrawer,
     userId,
     setUserId:updateUserId,
+    userData,
+    setUserData:updateUserData
   };
  
   
