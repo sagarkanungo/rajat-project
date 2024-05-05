@@ -33,7 +33,7 @@ function Header({ handleSearch, searchQuery }, props) {
 
   const handleLoginLogout = () => {
     if (isUserLogin) {
-      localStorage.removeItem("loggedin");
+      localStorage.removeItem("isUserLoggedIn");
       setIsUserLogin(false);
       toast.success("Logout successfully!");
       router.push("/login");

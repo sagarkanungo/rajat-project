@@ -29,34 +29,36 @@ function Services() {
   return (
     <>
       <Box sx={{ marginTop: { xs: 8, md: 8 }, marginLeft: { xs: 2, md: 4 } }}>
-        <Box
-          padding={{ xs: "16px", md: "16px" }}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-          }}
-        >
-          <Box sx={{ display: "flex", flexDirection: "row" }}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <Typography
-                sx={{
-                  letterSpacing: { xs: "-0.36px", md: "-0.48px" },
-                  color: "black",
-                  textAlign: "center",
-                  fontSize: "1.5rem",
-                  display:'flex',
-                  justifyContent:'flex-start'
-                }}
-              >
-                Welcome ✌️, {userData && userData.name}
-              </Typography>
-              <Typography variant="body2">
-                Chouse Your Package and We Will provide better Service!
-              </Typography>
+        {isUserLogin && (
+          <Box
+            padding={{ xs: "16px", md: "16px" }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+            }}
+          >
+            <Box sx={{ display: "flex", flexDirection: "row" }}>
+              <Box sx={{ display: "flex", flexDirection: "column" }}>
+                <Typography
+                  sx={{
+                    letterSpacing: { xs: "-0.36px", md: "-0.48px" },
+                    color: "black",
+                    textAlign: "center",
+                    fontSize: "1.5rem",
+                    display: "flex",
+                    justifyContent: "flex-start",
+                  }}
+                >
+                  Welcome ✌️, {userData && userData.name}
+                </Typography>
+                <Typography variant="body2">
+                  Chouse Your Package and We Will provide better Service!
+                </Typography>
+              </Box>
             </Box>
           </Box>
-        </Box>
+        )}
         <Typography
           variant="h3"
           sx={{

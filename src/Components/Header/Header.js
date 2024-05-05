@@ -58,9 +58,10 @@ function Header(props) {
         toast.success("Logout successfully!");
       }
       // Redirect admin to dashboard after a delay of 1 second
-      setTimeout(() => {
-        router.push("/login");
-      }, 1000);
+      // setTimeout(() => {
+      //   router.push("/login");
+      // }, 1000);
+      router.push("/login");
     } catch (error) {
       console.error("Error signing out:", error.message);
       // Handle sign out error
