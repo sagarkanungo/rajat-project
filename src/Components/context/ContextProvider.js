@@ -17,6 +17,8 @@ export const ContextData = createContext({
   setUserId:(e) => e,
   userData:null,
   setUserData:(e) => e,
+  selectedDateTime:'',
+  setSelectedDateTime:(e) => e,
 });
 
 export default function RootLayout({ children }) {
@@ -25,6 +27,8 @@ export default function RootLayout({ children }) {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [userId, setUserId] = useState(null); 
   const [userData, setUserData] = useState(null);
+  const [selectedDateTime, setSelectedDateTime] = useState("");
+
 
 
   useEffect(() => {
@@ -70,7 +74,9 @@ export default function RootLayout({ children }) {
     userId,
     setUserId:updateUserId,
     userData,
-    setUserData:updateUserData
+    setUserData:updateUserData,
+    selectedDateTime,
+    setSelectedDateTime
   };
  
   
