@@ -4,8 +4,10 @@ import DashboardHeader from "../dashboard/DashboardHeader";
 import { Typography, Box } from "@mui/material";
 import { useState, useEffect } from "react";
 import UserDetail from "../dashboard/UserDetail";
+import { useRouter } from "next/navigation";
 
 function Dashboard() {
+  const router = useRouter();
   const [userName, setUserName] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -20,11 +22,19 @@ function Dashboard() {
       setUserName(loggedInUserName);
     }
   }, []);
+  // useEffect(() => {
+  //   // Check if the component is rendered on the client-side
+  //   if (typeof window !== 'undefined') {
+  //     // If the component is rendered on the client-side, redirect to another route
+  //     router.replace('/'); // Redirect to the homepage or any other route
+  //   }
+  // }, []); 
+  // return null;
   return (
     <>
       <DashboardHeader handleSearch={handleSearch} searchQuery={searchQuery} />
       <Box
-        padding={{ xs: "16px", md: "80px" }}
+        padding={{ xs: "16px", md: "16px" }}
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
         <Box sx={{ display: "flex", flexDirection: "row" }}>

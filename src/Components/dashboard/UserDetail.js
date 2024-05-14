@@ -280,7 +280,6 @@ function UserDetail({ searchQuery }) {
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = filteredData.slice(indexOfFirstRow, indexOfLastRow);
 
-  
   return (
     <>
       <Grid container spacing={1} alignItems="center" justifyContent="center">
@@ -297,7 +296,7 @@ function UserDetail({ searchQuery }) {
                 <Table border="2px">
                   <TableHead sx={{ backgroundColor: "slategray" }}>
                     <TableRow>
-                    <TableCell sx={{ color: "white", textAlign: "center" }}>
+                      <TableCell sx={{ color: "white", textAlign: "center" }}>
                         Select
                       </TableCell>
                       <TableCell sx={{ color: "white", textAlign: "center" }}>
@@ -336,7 +335,6 @@ function UserDetail({ searchQuery }) {
                           <TableCell sx={{ textAlign: "center" }}>
                             <IconButton>
                               <ArrowDropDownIcon
-                              
                                 color={
                                   expandedRows.includes(item.id)
                                     ? "primary"
@@ -399,17 +397,40 @@ function UserDetail({ searchQuery }) {
                                 {item.userPackageDetail && (
                                   <Table>
                                     <TableHead>
-                                      <TableRow style={{fontSize:'18px',fontWeight:700}}>
+                                      <TableRow
+                                        style={{
+                                          fontSize: "18px",
+                                          fontWeight: 700,
+                                        }}
+                                      >
                                         PackageDetail:-
                                       </TableRow>
-                                      <TableRow >
-                                        <TableCell align="center" style={{fontSize:'15px',fontWeight:700}}>
+                                      <TableRow>
+                                        <TableCell
+                                          align="center"
+                                          style={{
+                                            fontSize: "15px",
+                                            fontWeight: 700,
+                                          }}
+                                        >
                                           Service
                                         </TableCell>
-                                        <TableCell align="center" style={{fontSize:'15px',fontWeight:700}}>
+                                        <TableCell
+                                          align="center"
+                                          style={{
+                                            fontSize: "15px",
+                                            fontWeight: 700,
+                                          }}
+                                        >
                                           Selected Package
                                         </TableCell>
-                                        <TableCell align="center" style={{fontSize:'15px',fontWeight:700}}>
+                                        <TableCell
+                                          align="center"
+                                          style={{
+                                            fontSize: "15px",
+                                            fontWeight: 700,
+                                          }}
+                                        >
                                           Date
                                         </TableCell>
                                       </TableRow>
@@ -420,15 +441,14 @@ function UserDetail({ searchQuery }) {
                                       ).map(([service, packageDetail]) => (
                                         <TableRow key={service}>
                                           <TableCell align="center">
-                                            {service}
+                                            {packageDetail.selectedService}
                                           </TableCell>
                                           <TableCell align="center">
                                             {packageDetail.selectedPackage}
                                           </TableCell>
                                           <TableCell align="center">
-                                          {packageDetail.dateTime}
+                                            {packageDetail.dateTime}
                                           </TableCell>
-                                         
                                         </TableRow>
                                       ))}
                                     </TableBody>
