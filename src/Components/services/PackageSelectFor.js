@@ -84,7 +84,6 @@ function PackageSelectFor({ handleDrawerClose }) {
   //     // Update user data with the merged data
   //     await update(ref(db, `users/${userId}`), updatedUserData);
   //     console.log("User booking data saved successfully.");
-     
 
   //     // Reset form fields
   //     setFormData({
@@ -103,26 +102,27 @@ function PackageSelectFor({ handleDrawerClose }) {
   //   }
   // };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const db = getDatabase(app);
-  
+
     try {
       const newPackageData = {
         selectedService: formData.selectedService,
         selectedPackage: formData.selectedPackage,
         dateTime: formatDate(selectedDateTime),
       };
-  
+
       const userPackageRef = ref(db, `users/${userId}`);
       const userPackageSnapshot = await get(userPackageRef);
       let existingUserData = {};
-  
+
       if (userPackageSnapshot.exists()) {
         existingUserData = userPackageSnapshot.val();
       }
-  
+      if (!Array.isArray(existingUserData.userPackageDetail)) {
+        existingUserData.userPackageDetail = [];
+      }
       // Initialize the userPackageDetail array if it doesn't exist
       const updatedUserData = {
         ...existingUserData,
@@ -131,10 +131,11 @@ function PackageSelectFor({ handleDrawerClose }) {
           ...(existingUserData.userPackageDetail || []),
         ],
       };
-  
+
       await update(ref(db, `users/${userId}`), updatedUserData);
       console.log("User booking data saved successfully.");
-  
+      console.log(updatedUserData,'--------->update');
+
       setFormData({
         selectedService: "",
         selectedPackage: "",
@@ -144,12 +145,31 @@ function PackageSelectFor({ handleDrawerClose }) {
       });
       setSelectedDateTime("");
       setOpen(true);
-  
+      const userName = existingUserData.name || "User";
+      const userEmail = existingUserData.email || "example@example.com";
+      const emailMessage = `Hello ${userName || "User"}, we got your package selection "${formData.selectedService} - ${formData.selectedPackage}". We will inform you shortly.`;
+
+      const emailData = {
+        to_name: userName,
+        to_email: userEmail,
+        message: emailMessage,
+      };
+      const service_id = "service_kbh503g";
+      const template_id = "template_wdew3yi";
+      const user_id = "Aff2xtLqA2qu8qj5y";
+      emailjs.send(service_id, template_id, emailData, user_id).
+     then(
+      function(response){
+      console.log('sent')
+      },
+       function(error){
+      console.log(error)
+      }
+      )
     } catch (error) {
       console.error("Error saving user booking data:", error.message);
     }
   };
-  
 
   const handleClose = () => {
     setOpen(false);
@@ -244,32 +264,11 @@ function PackageSelectFor({ handleDrawerClose }) {
           </Button>
         </Box>
       </Box>
-      {/* <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Your Package is successfully Sent to Administration, we Will Call
-            you for Furthur Detail And Check
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button variant="text" background="none" onClick={handleClose}>
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog> */}
       <Dilog
         open={open}
         onClose={handleClose}
         content=" Your Package is successfully Sent to Administration, we Will Call
-      you for Furthur Detail And Check"
+          you for Furthur Detail And Check"
         title="Use Google's location service?"
       />
     </>

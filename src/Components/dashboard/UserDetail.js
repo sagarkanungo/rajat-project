@@ -280,6 +280,7 @@ function UserDetail({ searchQuery }) {
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = filteredData.slice(indexOfFirstRow, indexOfLastRow);
 
+  
   return (
     <>
       <Grid container spacing={1} alignItems="center" justifyContent="center">
@@ -335,6 +336,7 @@ function UserDetail({ searchQuery }) {
                           <TableCell sx={{ textAlign: "center" }}>
                             <IconButton>
                               <ArrowDropDownIcon
+                              
                                 color={
                                   expandedRows.includes(item.id)
                                     ? "primary"
