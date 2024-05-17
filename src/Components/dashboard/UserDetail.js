@@ -217,13 +217,14 @@ import {
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { ContextData } from "../context/ContextProvider";
+import CustomPagination from '../CustomPagination/CustomPagination'
 
 function UserDetail({ searchQuery }) {
   // const { userId,setSelectedDateTime,selectedDateTime} = useContext(ContextData);
   const [userData, setUserData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [page, setPage] = useState(1);
-  const [rowsPerPage] = useState(10);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage] = useState(6);
   const [expandedRows, setExpandedRows] = useState([]);
 
   useEffect(() => {
@@ -260,7 +261,7 @@ function UserDetail({ searchQuery }) {
           user.email.toLowerCase().includes(searchQuery.toLowerCase()))
     );
     setFilteredData(filtered);
-    setPage(1); // Reset page when search query changes
+    setPage(0); // Reset page when search query changes
   }, [searchQuery, userData]);
 
   const handleChangePage = (event, newPage) => {
@@ -276,7 +277,7 @@ function UserDetail({ searchQuery }) {
     );
   };
 
-  const indexOfLastRow = page * rowsPerPage;
+  const indexOfLastRow = (page + 1)  * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = filteredData.slice(indexOfFirstRow, indexOfLastRow);
 
@@ -297,36 +298,36 @@ function UserDetail({ searchQuery }) {
                 <Table border="2px">
                   <TableHead sx={{ backgroundColor: "slategray" }}>
                     <TableRow>
-                      <TableCell sx={{ color: "white", textAlign: "center" }}>
+                      <TableCell sx={{ color: "white", textAlign: "center",fontWeight:"bold"  }}>
                         Select
                       </TableCell>
-                      <TableCell sx={{ color: "white", textAlign: "center" }}>
+                      <TableCell sx={{ color: "white", textAlign: "center",fontWeight:"bold"  }}>
                         Full Name
                       </TableCell>
-                      <TableCell sx={{ color: "white", textAlign: "center" }}>
+                      <TableCell sx={{ color: "white", textAlign: "center" ,fontWeight:"bold" }}>
                         Email
                       </TableCell>
-                      <TableCell sx={{ color: "white", textAlign: "center" }}>
+                      <TableCell sx={{ color: "white", textAlign: "center",fontWeight:"bold"  }}>
                         DOB
                       </TableCell>
-                      <TableCell sx={{ color: "white", textAlign: "center" }}>
+                      <TableCell sx={{ color: "white", textAlign: "center" ,fontWeight:"bold" }}>
                         Country
                       </TableCell>
-                      <TableCell sx={{ color: "white", textAlign: "center" }}>
+                      <TableCell sx={{ color: "white", textAlign: "center",fontWeight:"bold" }}>
                         City
                       </TableCell>
-                      <TableCell sx={{ color: "white", textAlign: "center" }}>
+                      <TableCell sx={{ color: "white", textAlign: "center",fontWeight:"bold"  }}>
                         State{" "}
                       </TableCell>
-                      <TableCell sx={{ color: "white", textAlign: "center" }}>
+                      <TableCell sx={{ color: "white", textAlign: "center",fontWeight:"bold"  }}>
                         Mobile
                       </TableCell>
                       {/* <TableCell sx={{ color: "white", textAlign: "center" }}>
                         Package
                       </TableCell> */}
-                      <TableCell sx={{ color: "white", textAlign: "center" }}>
+                      {/* <TableCell sx={{ color: "white", textAlign: "center" }}>
                         Remove
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -367,7 +368,7 @@ function UserDetail({ searchQuery }) {
                             {item.phoneNumber}
                           </TableCell>
 
-                          <TableCell sx={{ textAlign: "center" }}>
+                          {/* <TableCell sx={{ textAlign: "center" }}>
                             <Button
                               sx={{
                                 color: "red",
@@ -383,7 +384,7 @@ function UserDetail({ searchQuery }) {
                             >
                               <DeleteIcon />
                             </Button>
-                          </TableCell>
+                          </TableCell> */}
                         </TableRow>
                         <TableRow>
                           <TableCell
@@ -469,13 +470,11 @@ function UserDetail({ searchQuery }) {
           </Paper>
         </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <TablePagination
-          rowsPerPageOptions={[10]}
-          component="div"
-          count={userData.length}
+      <Grid item xs={6}>
+      <CustomPagination
+          count={filteredData.length}
+          page={page}
           rowsPerPage={rowsPerPage}
-          page={page - 1}
           onPageChange={handleChangePage}
         />
       </Grid>

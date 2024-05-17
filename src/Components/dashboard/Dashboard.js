@@ -30,8 +30,8 @@ function Dashboard() {
     <>
       <DashboardHeader handleSearch={handleSearch} searchQuery={searchQuery} />
       <Box
-        padding={{ xs: "16px", md: "16px" }}
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+        padding={{ xs: "16px", md: "80px" }}
+        sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}
       >
         <Box sx={{ display: "flex", flexDirection: "row" }}>
           <Box sx={{ display: "flex", flexDirection: "column" }}>

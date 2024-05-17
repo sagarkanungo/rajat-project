@@ -11,6 +11,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { get, getDatabase, ref } from "firebase/database";
+import { useFormik } from "formik";
+import LoginSchema from '../../schemas/LoginSchema'
 
 function Login() {
   const auth = getAuth(app);
@@ -18,145 +20,58 @@ function Login() {
   const router = useRouter();
 
   // State for login credentials
-  const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials({ ...credentials, [name]: value });
-  };
-
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   try {
-  //     if (
-  //       credentials.email === "rajatadmin@gmail.com" &&
-  //       credentials.password === "rajat@123"
-  //     ) {
-  //       console.log("Admin signed in");
-  //       setIsUserLogin(true);
-  //       localStorage.setItem("isUserLoggedIn", "true");
-  //       toast.success("Admin logged in successfully!");
-  //       // Redirect admin to dashboard after a delay of 1 second
-  //       setTimeout(() => {
-  //         router.push("/dashboard");
-  //       }, 1000);
-  //     } else {
-  //       const userCredential = await signInWithEmailAndPassword(
-  //         auth,
-  //         credentials.email,
-  //         credentials.password
-  //       );
-  //       // User signed in successfully
-  //       console.log("User signed in:", userCredential.user);
-  //       setIsUserLogin(true);
-  //       localStorage.setItem("isUserLoggedIn", "true");
-  //       toast.success("Logged in successfully!");
-  //       // Redirect to services page after a delay of 1 second
-  //       setTimeout(() => {
-  //         router.push("/services");
-  //       }, 1000);
-  //     }
-  //   } catch (error) {
-  //     toast.error("Invalid email or password");
-  //     // Handle login error (e.g., display error message to the user)
-  //   } finally {
-  //     setLoading(false); // Set loading back to false after login process completes
-  //   }
-  // };
-
-
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   try {
-  //     const userCredential = await signInWithEmailAndPassword(
-  //       auth,
-  //       credentials.email,
-  //       credentials.password
-  //     );
-  //     const userId = userCredential.user.uid;
-  //     console.log(userId,'------------------->')
-  //     setUserId(userId);
-  //     if (credentials.email === "rajatadmin@gmail.com") {
-  //       console.log("Admin signed in:", userCredential.user);
-  //       setIsUserLogin(true);
-  //       localStorage.setItem("isUserLoggedIn", "true");
-  //       toast.success("Admin logged in successfully!");
-
-  //       setTimeout(() => {
-  //         router.push("/dashboard");
-  //       }, 1000);
-  //     } else {
-  //       console.log("User signed in:", userCredential.user);
-  //       setIsUserLogin(true);
-  //       localStorage.setItem("isUserLoggedIn", "true");
-  //       toast.success("Logged in successfully!");
-
-  //       setTimeout(() => {
-  //         router.push("/services");
-  //       }, 1000);
-  //     }
-  //   } catch (error) {
-  //     toast.error("Invalid email or password");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      console.log("Logging in with credentials:", credentials);
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        credentials.email,
-        credentials.password
-      );
-      const userId = userCredential.user.uid;
-      setUserId(userId);
-  console.log(userId)
-      // Check if the logged-in user is an admin
-      if (credentials.email === "rajatadmin@gmail.com") {
-        console.log("Admin signed in:", userCredential.user);
-        setIsUserLogin(true);
-        localStorage.setItem("isUserLoggedIn", "true");
-        toast.success("Admin logged in successfully!");
-        setTimeout(() => {
-          router.push("/dashboard");
-        }, 1000);
-      } else {
-        // Fetch user data from Firebase
-        const db = getDatabase(app);
-        const userRef = ref(db, `users/${userId}`);
-        const userSnapshot = await get(userRef);
-        const userData = userSnapshot.val();
-        setUserData(userData); 
-        if (userSnapshot.exists()) {
-          console.log("User signed in:", userCredential.user);
-          console.log("User name:", userData.name);
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: LoginSchema,
+    onSubmit: async (values) => {
+      setLoading(true);
+      try {
+        console.log("Logging in with credentials:", values);
+        const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
+        const userId = userCredential.user.uid;
+        setUserId(userId);
+        console.log(userId);
+        // Check if the logged-in user is an admin
+        if (values.email === "rajatadmin@gmail.com") {
+          console.log("Admin signed in:", userCredential.user);
           setIsUserLogin(true);
           localStorage.setItem("isUserLoggedIn", "true");
-          toast.success("Logged in successfully!");
+          toast.success("Admin logged in successfully!");
           setTimeout(() => {
-            router.push("/services");
-           
+            router.push("/dashboard");
           }, 1000);
         } else {
-          console.error("User data not found");
-          toast.error("User data not found");
+          // Fetch user data from Firebase
+          const db = getDatabase(app);
+          const userRef = ref(db, `users/${userId}`);
+          const userSnapshot = await get(userRef);
+          const userData = userSnapshot.val();
+          setUserData(userData);
+          if (userSnapshot.exists()) {
+            console.log("User signed in:", userCredential.user);
+            console.log("User name:", userData.name);
+            setIsUserLogin(true);
+            localStorage.setItem("isUserLoggedIn", "true");
+            toast.success("Logged in successfully!");
+            setTimeout(() => {
+              router.push("/services");
+            }, 1000);
+          } else {
+            console.error("User data not found");
+            toast.error("User data not found");
+          }
         }
+      } catch (error) {
+        console.error("Error logging in:", error);
+        toast.error("Invalid email or password");
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error("Error logging in:", error);
-      toast.error("Invalid email or password");
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+  });
 
   
   
@@ -180,11 +95,12 @@ function Login() {
             >
               Explore your Packages!
             </Typography>
-            <form onSubmit={handleLogin}>
+            <form onSubmit={formik.handleSubmit}>
               <TextField
                 name="email"
-                value={credentials.email}
-                onChange={handleInputChange}
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 placeholder="Email"
                 fullWidth
                 variant="outlined"
@@ -195,11 +111,14 @@ function Login() {
                     backgroundColor: "white",
                   },
                 }}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
               />
               <TextField
                 name="password"
-                value={credentials.password}
-                onChange={handleInputChange}
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 placeholder="Password"
                 fullWidth
                 type="password"
@@ -211,6 +130,8 @@ function Login() {
                     backgroundColor: "white",
                   },
                 }}
+                error={formik.touched.password && Boolean(formik.errors.password)}
+                helperText={formik.touched.password && formik.errors.password}
               />
               {loading ? (
                 <Box
