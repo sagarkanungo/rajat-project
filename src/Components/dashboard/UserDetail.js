@@ -237,7 +237,7 @@ function UserDetail({ searchQuery }) {
         const dataArray = Object.values(data); // Convert object to array
         setUserData(dataArray);
         setFilteredData(dataArray);
-        setTotalCount(data.length)
+        setTotalCount(dataArray.length)
       } else {
         // Handle case when data is empty
         setUserData([]);
