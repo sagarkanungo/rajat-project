@@ -16,7 +16,7 @@ import LoginSchema from '../../schemas/LoginSchema'
 
 function Login() {
   const auth = getAuth(app);
-  const { setIsUserLogin, loading, setLoading ,setUserId,setUserData} = useContext(ContextData);
+  const { setIsUserLogin, loading, setLoading ,setUserId,setUserData,} = useContext(ContextData);
   const router = useRouter();
 
   // State for login credentials

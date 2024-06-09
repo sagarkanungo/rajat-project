@@ -7,6 +7,7 @@ import { ContextData } from "../context/ContextProvider";
 
 const AboutSection = () => {
   const { isSticky,isMounted } = useContext(ContextData);
+  
   return (
     <>
       <Box sx={{ paddingTop: "50px" }}>

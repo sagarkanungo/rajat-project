@@ -226,6 +226,7 @@ function UserDetail({ searchQuery }) {
   const [page, setPage] = useState(0);
   const [rowsPerPage] = useState(6);
   const [expandedRows, setExpandedRows] = useState([]);
+  const [totalCount,setTotalCount] = useState(0)
 
   useEffect(() => {
     const db = getDatabase(app);
@@ -236,6 +237,7 @@ function UserDetail({ searchQuery }) {
         const dataArray = Object.values(data); // Convert object to array
         setUserData(dataArray);
         setFilteredData(dataArray);
+        setTotalCount(data.length)
       } else {
         // Handle case when data is empty
         setUserData([]);
@@ -289,6 +291,7 @@ function UserDetail({ searchQuery }) {
           <Typography align="center" variant="h5">
             Users Detail
           </Typography>
+         <Typography style={{fontSize:'28px',color:'black'}}> Toatal User:{totalCount}</Typography>
         </Grid>
 
         <Grid item xs={12}>

@@ -19,6 +19,7 @@ export const ContextData = createContext({
   setUserData:(e) => e,
   selectedDateTime:'',
   setSelectedDateTime:(e) => e,
+
 });
 
 export default function RootLayout({ children }) {
@@ -76,7 +77,8 @@ export default function RootLayout({ children }) {
     userData,
     setUserData:updateUserData,
     selectedDateTime,
-    setSelectedDateTime
+    setSelectedDateTime,
+   
   };
  
   

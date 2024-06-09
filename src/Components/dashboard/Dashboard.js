@@ -1,7 +1,7 @@
 "use client";
 import React, { useContext } from "react";
 import DashboardHeader from "../dashboard/DashboardHeader";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, CircularProgress } from "@mui/material";
 import { useState, useEffect } from "react";
 import UserDetail from "../dashboard/UserDetail";
 import { useRouter } from "next/navigation";
@@ -18,13 +18,28 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    // Retrieve logged-in user's name from local storage
-    const loggedInUserName = localStorage.getItem("loggedInUserName");
-    if (loggedInUserName) {
-      setUserName(loggedInUserName);
+    // Check if the user is logged in
+    if (!isUserLogin) {
+      router.push("/login");
+    } else {
+      // Retrieve logged-in user's name from local storage
+      const loggedInUserName = localStorage.getItem("loggedInUserName");
+      if (loggedInUserName) {
+        setUserName(loggedInUserName);
+      }
     }
-  }, []);
- 
+  }, [isUserLogin, router]);
+
+  if (!isUserLogin) {
+    return <div   
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh',
+    }}><CircularProgress/></div>;
+  }
+
   
   return (
     <>
